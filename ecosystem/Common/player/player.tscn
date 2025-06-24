@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://e2timugao8yh"]
+
+[ext_resource type="Script" uid="uid://cqrawp1whp758" path="res://Common/player/player.gd" id="1_4vru1"]
+[ext_resource type="Texture2D" uid="uid://b3umgk8q4cdkh" path="res://icon.svg" id="2_dlcy6"]
+[ext_resource type="Script" uid="uid://dyncevs5v40co" path="res://Common/isometric_character_controller/isometric_character_controller.gd" id="3_w538m"]
+[ext_resource type="PackedScene" uid="uid://bgo6laeo2aaq" path="res://Common/isometric_navigation_agent/isometric_navigation_agent.tscn" id="4_6l2p1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w538m"]
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("controller", "navigator")]
+script = ExtResource("1_4vru1")
+controller = NodePath("IsometricCharacterController")
+navigator = NodePath("NavigationAgent2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-4.76837e-07, 0)
+scale = Vector2(0.103516, 0.105469)
+texture = ExtResource("2_dlcy6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_w538m")
+
+[node name="IsometricCharacterController" type="Node2D" parent="."]
+script = ExtResource("3_w538m")
+metadata/_custom_type_script = "uid://dyncevs5v40co"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="NavigationAgent2D" parent="." instance=ExtResource("4_6l2p1")]

@@ -1,0 +1,2 @@
+extends NavigationAgent2D
+class_name IsometricNavigationAgent
