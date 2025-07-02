@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bgo6laeo2aaq"]
-
-[ext_resource type="Script" uid="uid://c3tolf8l21r07" path="res://Common/isometric_navigation_agent/isometric_navigation_agent.gd" id="1_kybiv"]
-
-[node name="isometric_navigation_agent" type="NavigationAgent2D"]
-script = ExtResource("1_kybiv")

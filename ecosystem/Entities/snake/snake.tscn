@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://cp760ibj4jfmp"]
+
+[ext_resource type="Script" uid="uid://wmeho15wci6c" path="res://Entities/snake/snake.gd" id="1_8bwt7"]
+
+[node name="Snake" type="Node2D"]
+position = Vector2(64, 42)
+script = ExtResource("1_8bwt7")
+
+[node name="Points" type="Node" parent="."]
+
+[node name="Anchor" type="CharacterBody2D" parent="Points"]
+position = Vector2(74, 42)
+
+[node name="Anchor2" type="Marker2D" parent="Points"]
+position = Vector2(54, 42)
+gizmo_extents = 0.5
+
+[node name="Anchor3" type="Marker2D" parent="Points"]
+position = Vector2(65, 42)
+gizmo_extents = 0.5
+
+[node name="Anchor4" type="Marker2D" parent="Points"]
+position = Vector2(60, 42)
+gizmo_extents = 0.5
+
+[node name="Anchor5" type="Marker2D" parent="Points"]
+position = Vector2(69, 42)
+gizmo_extents = 0.5
