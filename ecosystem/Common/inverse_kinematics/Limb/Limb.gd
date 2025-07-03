@@ -36,6 +36,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	target_pos = to_local(get_global_mouse_position())
 	fabrikF()
 	fabrikB()
 
@@ -68,5 +69,7 @@ func fabrikB():
 		direction = direction.normalized() * previous.length
 		
 		current.position = previous.position + direction
+		# Reference direction: default is down
 		
+		# Apply angle constraint
 		previous = current

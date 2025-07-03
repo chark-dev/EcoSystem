@@ -2,6 +2,7 @@ extends Node2D
 class_name Body 
 
 var segments : Array[Segment]
+# Length of the creature in segments
 var length : int = 8
 var root_pos : Vector2 
 @export var target_pos : Vector2
@@ -14,6 +15,9 @@ func _init():
 	
 	for i in range(length):
 		var r : float = r1 - i * (r1/(length-1))
+#		^ Controls the Shape of the creature's segments.
+
+
 #		Makes Radius progressively get smaller. 
 		var segment = Segment.new(Vector2(root_pos.x, root_pos.y * 0.5 - i * r1),
 		0,
@@ -26,6 +30,7 @@ func _init():
 
 func update_segments():
 	var head : Segment = segments[0]
+	
 	var local_mouse_pos = to_local(get_global_mouse_position())
 	var a : float = atan2(local_mouse_pos.y - head.position.y, local_mouse_pos.x - head.position.x)
 	
