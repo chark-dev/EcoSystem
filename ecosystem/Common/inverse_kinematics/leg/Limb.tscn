@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cdetxtt3p1uhv"]
 
-[ext_resource type="Script" uid="uid://dfxqcn8aoudpk" path="res://Common/inverse_kinematics/leg/leg.gd" id="1_rvi1u"]
+[ext_resource type="Script" uid="uid://dfxqcn8aoudpk" path="res://Common/inverse_kinematics/leg/Limb.gd" id="1_rvi1u"]
 
 [node name="Limb" type="Node2D"]
 script = ExtResource("1_rvi1u")
