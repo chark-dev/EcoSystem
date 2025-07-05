@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://btbdaremkxvhc"]
 
-[ext_resource type="Script" uid="uid://0ualjm1qovg0" path="res://Common/inverse_kinematics/Body/Body.gd" id="1_fl7th"]
+[ext_resource type="Script" uid="uid://0ualjm1qovg0" path="res://Common/Physics/Body/Body.gd" id="1_fl7th"]
 
 [node name="Body" type="Node2D"]
 script = ExtResource("1_fl7th")

@@ -8,6 +8,9 @@ var root_pos : Vector2
 @export var target_pos : Vector2
 @export var speed : int = 1
 
+@onready var left_limb = $Limb
+@onready var right_limb = $Limb2
+
 func _init():
 	segments = []
 	root_pos = Vector2.ZERO
@@ -39,6 +42,7 @@ func update_segments():
 	head.position.x += speed * cos(head.angle)
 	head.position.y += speed * sin(head.angle)
 	
+	
 	var i = 1
 	while i < length:
 		var seg_c : Segment = segments[i]
@@ -50,3 +54,16 @@ func update_segments():
 
 func _physics_process(delta: float) -> void:
 	update_segments()
+	left_limb.root_pos = segments[2].global_position  # Or an offset point like head.position
+	right_limb.root_pos = segments[3].global_position
+	#queue_redraw()
+
+
+
+#func _draw() -> void:
+	#draw_foot(left_foot.position)
+	#draw_foot(right_foot.position)
+
+
+func draw_foot(foot: Vector2):
+	draw_circle(foot, 3, Color.BROWN)
