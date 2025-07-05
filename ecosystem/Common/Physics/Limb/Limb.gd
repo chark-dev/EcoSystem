@@ -16,17 +16,17 @@ func _ready() -> void:
 	
 	print("^ Root Pos for limb.")
 	
-	var ls : float = 10
+	var ls : float = 15
 	var sum : float = 10
 	
 	print("Printing positions for joints.")
 	
-	var shoulder = Joint.new(Vector2(root_pos.x, root_pos.y), ls)
+	var shoulder = Joint.new(Vector2(root_pos.x, root_pos.y), ls, 0)
 	add_child(shoulder)
 	joints.append(shoulder)
 	
 	for i in range(numEffectors - 1):
-		var newEffector = Joint.new(Vector2(root_pos.x, root_pos.y - sum), ls)
+		var newEffector = Joint.new(Vector2(root_pos.x, root_pos.y - sum), ls, 0)
 		add_child(newEffector)
 		print(newEffector.position)
 		joints.append(newEffector)
@@ -36,8 +36,10 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	target_pos = to_local(get_global_mouse_position())
 	fabrikF()
 	fabrikB()
+	queue_redraw()
 
 
 func fabrikF():
@@ -68,5 +70,17 @@ func fabrikB():
 		direction = direction.normalized() * previous.length
 		
 		current.position = previous.position + direction
+		# Reference direction: default is down
 		
+		# Apply angle constraint
 		previous = current
+
+
+func _draw() -> void:
+	if joints.size() < 2:
+		return
+	
+	for i in range(joints.size() - 1):
+		var from_point = joints[i].position
+		var to_point = joints[i + 1].position
+		draw_line(from_point, to_point, Color.BLACK, 2.0)

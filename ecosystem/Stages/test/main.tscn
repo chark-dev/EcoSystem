@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bdd5uvn00ddkn" path="res://Stages/test/test.gd" id="1_oveao"]
 [ext_resource type="PackedScene" uid="uid://e2timugao8yh" path="res://Common/player/player.tscn" id="2_kgv6h"]
 [ext_resource type="TileSet" uid="uid://dexlrlyjvv6ha" path="res://Stages/tilesets/example_tileset.tres" id="3_ech3y"]
-[ext_resource type="PackedScene" uid="uid://cdetxtt3p1uhv" path="res://Common/inverse_kinematics/leg/Limb.tscn" id="4_kgv6h"]
+[ext_resource type="PackedScene" uid="uid://cdetxtt3p1uhv" path="res://Common/Physics/Limb/Limb.tscn" id="4_kgv6h"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_oveao")

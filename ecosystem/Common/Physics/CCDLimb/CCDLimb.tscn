@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dddj0amatlhw0"]
+
+[ext_resource type="Script" uid="uid://cx0wc1elbc2tl" path="res://Common/Physics/CCDLimb/CCDLimb.gd" id="1_5p0gf"]
+
+[node name="BoundLimb" type="Node2D"]
+position = Vector2(171, 104)
+script = ExtResource("1_5p0gf")
