@@ -10,16 +10,17 @@ var is_moving: bool = false
 
 @onready var state_machine : StateMachine = $StateMachine
 
-@onready var layer0: TileMapLayer = $"../Layer0"
-@onready var layer1: TileMapLayer = $"../Layer1"
+@export var layer0: TileMapLayer 
+@export var layer1: TileMapLayer 
 
 
 func _ready() -> void:
+	
 	# Snap initial position to tile center
 	var current_tile = layer0.local_to_map(global_position)
 	global_position = layer0.map_to_local(current_tile)
 	
-	state_machine.init(self)
+	#state_machine.init(self)
 	print("Player initial position (snapped to center): ", global_position)
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -55,7 +56,7 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	state_machine.process_physics(delta)
+	#state_machine.process_physics(delta)
 	
 	
 	if not is_moving or path.is_empty():

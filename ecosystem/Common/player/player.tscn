@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://e2timugao8yh"]
+[gd_scene load_steps=5 format=3 uid="uid://e2timugao8yh"]
 
 [ext_resource type="Script" uid="uid://cqrawp1whp758" path="res://Common/player/player.gd" id="1_4vru1"]
 [ext_resource type="Texture2D" uid="uid://b3umgk8q4cdkh" path="res://icon.svg" id="2_dlcy6"]
 [ext_resource type="Script" uid="uid://dyncevs5v40co" path="res://Common/isometric_character_controller/isometric_character_controller.gd" id="3_w538m"]
-[ext_resource type="Script" uid="uid://t1u03opvyfvy" path="res://Common/FSM/StateMachine/StateMachine.gd" id="4_6l2p1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_w538m"]
 
@@ -23,7 +22,3 @@ script = ExtResource("3_w538m")
 metadata/_custom_type_script = "uid://dyncevs5v40co"
 
 [node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="StateMachine" type="Node" parent="."]
-script = ExtResource("4_6l2p1")
-metadata/_custom_type_script = "uid://t1u03opvyfvy"
