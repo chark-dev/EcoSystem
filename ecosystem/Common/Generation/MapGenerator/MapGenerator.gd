@@ -19,6 +19,8 @@ func _ready() -> void:
 	altitude.seed = randi()
 	generate_chunk(target_origin.position)
 	queue_redraw()
+	print(get_used_rect())
+	get_parent().init()
 
 
 

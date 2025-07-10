@@ -54,8 +54,8 @@ func update_segments():
 
 func _physics_process(delta: float) -> void:
 	update_segments()
-	left_limb.root_pos = segments[2].global_position  # Or an offset point like head.position
-	right_limb.root_pos = segments[3].global_position
+	#left_limb.root_pos = segments[2].global_position  # Or an offset point like head.position
+	#right_limb.root_pos = segments[3].global_position
 	#queue_redraw()
 
 

@@ -2,6 +2,7 @@ extends Node
 class_name State 
 
 var parent : CharacterBody2D
+var level_manager : LevelManager
 
 func enter():
 	pass

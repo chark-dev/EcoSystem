@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://xec41wru57i0"]
+[gd_scene load_steps=5 format=3 uid="uid://xec41wru57i0"]
 
 [ext_resource type="Script" uid="uid://4uboksgefeae" path="res://Common/Generation/MapGenerator/MapGenerator.gd" id="1_c2ij3"]
+[ext_resource type="Script" uid="uid://l0dhwym56si4" path="res://Common/LevelManager/LevelManager.gd" id="1_q82ol"]
 [ext_resource type="TileSet" uid="uid://dexlrlyjvv6ha" path="res://Stages/tilesets/example_tileset.tres" id="1_vnikk"]
-[ext_resource type="PackedScene" uid="uid://e2timugao8yh" path="res://Common/player/player.tscn" id="3_5gf2w"]
+[ext_resource type="PackedScene" uid="uid://c07wpn2t0m4r8" path="res://Entities/Beetle/Beetle.tscn" id="4_q82ol"]
 
-[node name="ProceduralTest" type="Node2D"]
+[node name="ProceduralTest" type="Node2D" node_paths=PackedStringArray("tile_map")]
+script = ExtResource("1_q82ol")
+tile_map = NodePath("TileMapLayer")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_set = ExtResource("1_vnikk")
@@ -13,6 +16,6 @@ script = ExtResource("1_c2ij3")
 [node name="TileMapLayer2" type="TileMapLayer" parent="."]
 tile_set = ExtResource("1_vnikk")
 
-[node name="Player" parent="." node_paths=PackedStringArray("layer0", "layer1") instance=ExtResource("3_5gf2w")]
-layer0 = NodePath("../TileMapLayer")
-layer1 = NodePath("../TileMapLayer2")
+[node name="Beetle" parent="." node_paths=PackedStringArray("level_manager") instance=ExtResource("4_q82ol")]
+position = Vector2(178, 87)
+level_manager = NodePath("..")
