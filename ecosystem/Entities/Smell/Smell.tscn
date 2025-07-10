@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfg8x1b81d5fv"]
+
+[ext_resource type="Texture2D" uid="uid://va5pipkwnwsc" path="res://joint.png" id="1_bfmwm"]
+
+[node name="Smell" type="Sprite2D"]
+modulate = Color(1, 0, 0.611765, 1)
+texture = ExtResource("1_bfmwm")

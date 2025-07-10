@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjhy38ww6u74w"]
+
+[ext_resource type="Script" uid="uid://djsmo81uthh04" path="res://Entities/Food/Food.gd" id="1_fcvtj"]
+[ext_resource type="Texture2D" uid="uid://va5pipkwnwsc" path="res://joint.png" id="1_shxlr"]
+
+[node name="Food" type="Sprite2D"]
+texture = ExtResource("1_shxlr")
+script = ExtResource("1_fcvtj")

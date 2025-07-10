@@ -1,0 +1,48 @@
+[gd_scene load_steps=9 format=3 uid="uid://c07wpn2t0m4r8"]
+
+[ext_resource type="Script" uid="uid://gle08c5vhkv" path="res://Entities/Beetle/Beetle.gd" id="1_1xcpe"]
+[ext_resource type="Script" uid="uid://t1u03opvyfvy" path="res://Common/FSM/StateMachine/StateMachine.gd" id="2_wbhil"]
+[ext_resource type="Script" uid="uid://bkfs8hciuu73n" path="res://Common/States/Idle/Idle.gd" id="3_wbhil"]
+[ext_resource type="Texture2D" uid="uid://bcoo3atah0ic3" path="res://beete.png" id="4_v4kka"]
+[ext_resource type="Script" uid="uid://d3dcthbo4nfym" path="res://Common/States/Search/Search.gd" id="4_xosba"]
+[ext_resource type="Script" uid="uid://326cre4fg4bd" path="res://Common/States/Hide/Hide.gd" id="5_qh35w"]
+[ext_resource type="Script" uid="uid://6o1mvc3tgc7p" path="res://Common/States/Feed/Feed.gd" id="6_rf0ry"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d5sba"]
+radius = 3.60555
+
+[node name="Beetle" type="CharacterBody2D"]
+script = ExtResource("1_1xcpe")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("start_state")]
+script = ExtResource("2_wbhil")
+start_state = NodePath("Idle")
+metadata/_custom_type_script = "uid://t1u03opvyfvy"
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("search_state")]
+script = ExtResource("3_wbhil")
+search_state = NodePath("../Search")
+
+[node name="Search" type="Node" parent="StateMachine" node_paths=PackedStringArray("feed_state", "idle_state")]
+script = ExtResource("4_xosba")
+feed_state = NodePath("../Feed")
+idle_state = NodePath("../Idle")
+search_range = 3
+
+[node name="Hide" type="Node" parent="StateMachine"]
+script = ExtResource("5_qh35w")
+
+[node name="Feed" type="Node" parent="StateMachine"]
+script = ExtResource("6_rf0ry")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("4_v4kka")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_d5sba")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -36.0
+offset_top = -31.0
+offset_right = 40.0
+offset_bottom = -8.0
