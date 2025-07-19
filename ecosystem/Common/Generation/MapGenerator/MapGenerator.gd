@@ -1,7 +1,7 @@
 extends TileMapLayer
 class_name MapGenerator
 
-@onready var target_origin = get_parent().get_child(2)
+@onready var target_origin = Vector2.ZERO
 var moisture = FastNoiseLite.new()
 var temperature = FastNoiseLite.new()
 var altitude = FastNoiseLite.new()
@@ -12,15 +12,15 @@ var altitude = FastNoiseLite.new()
 @onready var food_scene = preload("res://Entities/Food/Food.tscn")
 @onready var smell_scene = preload("res://Entities/Smell/Smell.tscn")
 
+var smell_map = []
 
-func _ready() -> void:
+
+func init() -> void:
 	moisture.seed = randi()
 	temperature.seed = randi()
 	altitude.seed = randi()
-	generate_chunk(target_origin.position)
+	generate_chunk(target_origin)
 	queue_redraw()
-	print(get_used_rect())
-	get_parent().init()
 
 
 
@@ -58,6 +58,7 @@ func spawn_food(tile_pos : Vector2i):
 		add_smell(tile_pos)
 
 func add_smell(center: Vector2i):
+	
 	var offsets = [  # center
 	Vector2i( 1,  1),  # top-right
 	Vector2i(-1,  1),  # top-left
@@ -72,6 +73,6 @@ func add_smell(center: Vector2i):
 	for offset in offsets:
 		var pos = center + offset
 		var smell = smell_scene.instantiate()
+		smell_map.append(pos)
 		smell.position = map_to_local(pos)
 		add_child(smell)
-	

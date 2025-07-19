@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6p8y3ktpkr28"]
+
+[ext_resource type="Texture2D" uid="uid://b3umgk8q4cdkh" path="res://icon.svg" id="1_pnxke"]
+[ext_resource type="Script" uid="uid://vn6i4oampmf" path="res://Entities/Chest/chest.gd" id="2_4n8oa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ow74"]
+size = Vector2(128, 133.565)
+
+[node name="Chest" type="Node2D" groups=["interactable"]]
+scale = Vector2(0.171875, 0.179688)
+script = ExtResource("2_4n8oa")
+
+[node name="Area2D" type="Area2D" parent="." groups=["interactable"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_5ow74")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_pnxke")
+
+[node name="OutlineSprite2D" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 0, 1, 1)
+texture = ExtResource("1_pnxke")
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

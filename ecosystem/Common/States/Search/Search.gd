@@ -43,10 +43,16 @@ func search():
 	
 	for dir in search_directions:
 		var tile = current_pos + dir * search_range
+		
+		if level_manager.tile_map.smell_map.has(tile):
+			feed_state.food_position = tile
+			found_food = true
+			return
+		
+		
 		if not level_manager.astar_grid.is_point_solid(tile):
 			target_tiles.append(tile)
 	
-	print(target_tiles)
 	
 	level_manager.highlight_tiles(target_tiles)
 	

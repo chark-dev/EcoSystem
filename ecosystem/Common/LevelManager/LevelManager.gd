@@ -1,8 +1,21 @@
 extends Node2D
 class_name LevelManager 
 
+
+var combat = false
+
 @export var tile_map : TileMapLayer
 var astar_grid : AStarGrid2D
+
+@export var TBmanager : TurnBasedManager
+@export var EManager : EntityManager
+
+
+@export var player: Player 
+@export var inventory_interface: Control 
+
+
+var hovered_entity
 
 func init():
 	astar_grid = AStarGrid2D.new()
@@ -12,7 +25,30 @@ func init():
 	
 	astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
 	astar_grid.update()
+	
+	inventory_init()
+	
 
+func _ready():
+	player.toggle_inventory.connect(toggle_inventory_interface)
+	
+
+func inventory_init():
+	inventory_interface.set_player_inventory_data(player.inventory_data)
+	
+	for node in get_tree().get_nodes_in_group("external_inventory"):
+		node.toggle_inventory.connect(toggle_inventory_interface)
+
+func set_hovered_entity(entity):
+	hovered_entity = entity
+	print(hovered_entity)
+
+
+func toggle_inventory_interface(external_inventory_owner = null):
+	inventory_interface.visible = not inventory_interface.visible
+	
+	if external_inventory_owner:
+		inventory_interface.set_external_inventory(external_inventory_owner)
 
 
 func get_actor_path(current_pos, target_pos):
@@ -50,3 +86,9 @@ func highlight_tiles(tiles):
 		polygon.visible = true
 		polygon.position = tile_map.map_to_local(tile)
 		add_child(polygon)
+
+
+
+
+func get_creatures():
+	return EManager.get_entities()

@@ -1,21 +1,49 @@
-[gd_scene load_steps=5 format=3 uid="uid://xec41wru57i0"]
+[gd_scene load_steps=10 format=3 uid="uid://xec41wru57i0"]
 
-[ext_resource type="Script" uid="uid://4uboksgefeae" path="res://Common/Generation/MapGenerator/MapGenerator.gd" id="1_c2ij3"]
 [ext_resource type="Script" uid="uid://l0dhwym56si4" path="res://Common/LevelManager/LevelManager.gd" id="1_q82ol"]
 [ext_resource type="TileSet" uid="uid://dexlrlyjvv6ha" path="res://Stages/tilesets/example_tileset.tres" id="1_vnikk"]
-[ext_resource type="PackedScene" uid="uid://c07wpn2t0m4r8" path="res://Entities/Beetle/Beetle.tscn" id="4_q82ol"]
+[ext_resource type="PackedScene" uid="uid://cbrd0qbaii6or" path="res://Stages/tilesets/tile_map_layer.tscn" id="2_bbpfa"]
+[ext_resource type="PackedScene" uid="uid://e2timugao8yh" path="res://Common/player/player.tscn" id="2_kjmio"]
+[ext_resource type="PackedScene" uid="uid://caflfepqy0x1i" path="res://Common/TurnBasedManager/turn_based_manager.tscn" id="4_bbpfa"]
+[ext_resource type="Script" uid="uid://d35n776286ed5" path="res://Common/EntityManager/EntityManager.gd" id="5_7slxf"]
+[ext_resource type="Script" uid="uid://bihb7vjbs5g22" path="res://Resources/Stats/creaturestats.gd" id="8_bbpfa"]
+[ext_resource type="PackedScene" uid="uid://cw6w5f8huelcd" path="res://UI/UI.tscn" id="8_jsohk"]
 
-[node name="ProceduralTest" type="Node2D" node_paths=PackedStringArray("tile_map")]
+[sub_resource type="Resource" id="Resource_jsohk"]
+script = ExtResource("8_bbpfa")
+health = 10
+movement = 5
+initiative = 10
+metadata/_custom_type_script = "uid://bihb7vjbs5g22"
+
+[node name="ProceduralTest" type="Node2D" node_paths=PackedStringArray("tile_map", "TBmanager", "EManager", "player", "inventory_interface")]
 script = ExtResource("1_q82ol")
-tile_map = NodePath("TileMapLayer")
+tile_map = NodePath("")
+TBmanager = NodePath("")
+EManager = NodePath("EntityManager")
+player = NodePath("EntityManager/Player")
+inventory_interface = NodePath("CanvasLayer/InventoryInterface")
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_set = ExtResource("1_vnikk")
-script = ExtResource("1_c2ij3")
+[node name="TileMapLayer" parent="." instance=ExtResource("2_bbpfa")]
 
 [node name="TileMapLayer2" type="TileMapLayer" parent="."]
 tile_set = ExtResource("1_vnikk")
 
-[node name="Beetle" parent="." node_paths=PackedStringArray("level_manager") instance=ExtResource("4_q82ol")]
-position = Vector2(178, 87)
-level_manager = NodePath("..")
+[node name="CellHighlighter" type="Node" parent="."]
+
+[node name="TurnBasedManager" parent="." instance=ExtResource("4_bbpfa")]
+
+[node name="EntityManager" type="Node" parent="."]
+script = ExtResource("5_7slxf")
+
+[node name="Player" parent="EntityManager" node_paths=PackedStringArray("layer0", "layer1") instance=ExtResource("2_kjmio")]
+stats = SubResource("Resource_jsohk")
+layer0 = NodePath("")
+layer1 = NodePath("../../TileMapLayer2")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="InventoryInterface" parent="CanvasLayer" instance=ExtResource("8_jsohk")]
+visible = false
+
+[editable path="CanvasLayer/InventoryInterface"]

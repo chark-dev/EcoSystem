@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://e2timugao8yh"]
+[gd_scene load_steps=6 format=3 uid="uid://e2timugao8yh"]
 
 [ext_resource type="Script" uid="uid://cqrawp1whp758" path="res://Common/player/player.gd" id="1_4vru1"]
+[ext_resource type="Resource" uid="uid://c51pxd5o54bxu" path="res://Resources/TestInv.tres" id="2_6l2p1"]
 [ext_resource type="Texture2D" uid="uid://b3umgk8q4cdkh" path="res://icon.svg" id="2_dlcy6"]
 [ext_resource type="Script" uid="uid://dyncevs5v40co" path="res://Common/isometric_character_controller/isometric_character_controller.gd" id="3_w538m"]
 
@@ -8,6 +9,7 @@
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_4vru1")
+inventory_data = ExtResource("2_6l2p1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-4.76837e-07, 0)

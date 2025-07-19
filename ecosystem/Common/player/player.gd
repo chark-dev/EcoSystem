@@ -1,12 +1,18 @@
 extends CharacterBody2D
 class_name Player
 
+
+signal toggle_inventory()
+@export var inventory_data : InventoryData
+
 @export var move_speed: float = 100.0
 @export var arrival_threshold: float = 1.0 # Smaller threshold for precise center alignment
 
 var target_position: Vector2
 var path: PackedVector2Array
 var is_moving: bool = false
+
+@export var stats : CreatureStats
 
 @onready var state_machine : StateMachine = $StateMachine
 
@@ -24,6 +30,11 @@ func _ready() -> void:
 	print("Player initial position (snapped to center): ", global_position)
 
 func _unhandled_input(event: InputEvent) -> void:
+	
+	if Input.is_action_just_pressed("inventory"):
+		toggle_inventory.emit()
+	
+	
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			var click_pos = get_global_mouse_position()
@@ -93,3 +104,7 @@ func _advance_to_next_target() -> void:
 		_advance_to_next_target()
 	else:
 		print("New target set: ", target_position)
+
+
+func take_turn():
+	pass

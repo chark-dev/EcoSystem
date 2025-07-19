@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://cmrfv2vgymmu6"]
+
+[ext_resource type="Script" uid="uid://btfgu7uhn46di" path="res://UI/TopBar/top_bar.gd" id="1_6bvtm"]
+[ext_resource type="Script" uid="uid://b0yudkb238as7" path="res://UI/TopBar/portrait_panel.gd" id="2_1bqf4"]
+[ext_resource type="Script" uid="uid://7dv8ek0fnadu" path="res://UI/TopBar/StatsPanel.gd" id="3_1bqf4"]
+
+[node name="TopBar" type="HBoxContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_right = -624.0
+offset_bottom = 89.0
+script = ExtResource("1_6bvtm")
+
+[node name="PortraitPanel" type="Panel" parent="."]
+layout_mode = 2
+script = ExtResource("2_1bqf4")
+
+[node name="Portrait" type="TextureRect" parent="PortraitPanel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="StatsPanel" type="VBoxContainer" parent="."]
+layout_mode = 2
+script = ExtResource("3_1bqf4")
+
+[node name="StatusEffectsPanel" type="HBoxContainer" parent="."]
+layout_mode = 2

@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://c56alljub6e1l"]
+
+[ext_resource type="Script" uid="uid://c27xjmfvwtico" path="res://Entities/Scorpion/Scorpion.gd" id="1_57ufi"]
+[ext_resource type="Script" uid="uid://t1u03opvyfvy" path="res://Common/FSM/StateMachine/StateMachine.gd" id="2_imqni"]
+[ext_resource type="Script" uid="uid://bkfs8hciuu73n" path="res://Common/States/Idle/Idle.gd" id="3_ts0dt"]
+
+[node name="Scorpion" type="CharacterBody2D"]
+script = ExtResource("1_57ufi")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("2_imqni")
+metadata/_custom_type_script = "uid://t1u03opvyfvy"
+
+[node name="Hunt" type="Node" parent="StateMachine"]
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("3_ts0dt")
+metadata/_custom_type_script = "uid://bkfs8hciuu73n"
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]

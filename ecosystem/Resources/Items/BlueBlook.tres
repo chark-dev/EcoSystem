@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://bwb2kfe202fw6"]
+
+[ext_resource type="Script" uid="uid://bb3acrvqdmcrf" path="res://Common/Inventory/ItemData/ItemData.gd" id="1_ln7ij"]
+[ext_resource type="Texture2D" uid="uid://b4tu38bql74sx" path="res://Assets/#2 - Transparent Icons & Drop Shadow.png" id="2_dvy4s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xlh0u"]
+atlas = ExtResource("2_dvy4s")
+region = Rect2(0, 416, 32, 32)
+
+[resource]
+script = ExtResource("1_ln7ij")
+name = "BlueBook"
+description = "Good Reading.	"
+stackable = true
+texture = SubResource("AtlasTexture_xlh0u")
+metadata/_custom_type_script = "uid://bb3acrvqdmcrf"

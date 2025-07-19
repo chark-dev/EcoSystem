@@ -1,5 +1,5 @@
 extends CharacterBody2D
-class_name Beetle
+class_name Scorpion 
 
 @export var level_manager : LevelManager
 @onready var state_machine = $StateMachine
@@ -13,13 +13,9 @@ var current_point_path
 
 func _ready():
 	state_machine.init(self, level_manager)
-	var current_tile = level_manager.tile_map.local_to_map(global_position)
-	global_position = level_manager.tile_map.map_to_local(current_tile)
 
 
 func _physics_process(delta: float) -> void:
-	if level_manager.combat:
-		return
 	state_machine.process_physics(delta)
 
 
@@ -27,14 +23,9 @@ func move():
 	if current_path.is_empty():
 		return
 	
-	var target_position = level_manager.convert_path(current_path.front())
+	var target_position = get_parent().convert_path(current_path.front())
 	
 	global_position = global_position.move_toward(target_position, 1)
 	
 	if global_position == target_position:
 		current_path.pop_front()
-
-
-func take_turn():
-	print("Taking Turn")
-	pass 

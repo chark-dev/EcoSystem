@@ -1,0 +1,41 @@
+[gd_scene load_steps=9 format=3 uid="uid://dfrktvmuv0hpc"]
+
+[ext_resource type="Script" uid="uid://dalsdmxwll2n" path="res://Stages/turnBasedTest/TurnBasedTest.gd" id="1_egmog"]
+[ext_resource type="Script" uid="uid://d35n776286ed5" path="res://Common/EntityManager/EntityManager.gd" id="2_gsxb6"]
+[ext_resource type="PackedScene" uid="uid://cbrd0qbaii6or" path="res://Stages/tilesets/tile_map_layer.tscn" id="3_vrdeg"]
+[ext_resource type="Script" uid="uid://bihb7vjbs5g22" path="res://Resources/Stats/creaturestats.gd" id="4_0wo26"]
+[ext_resource type="PackedScene" uid="uid://e2timugao8yh" path="res://Common/player/player.tscn" id="4_rljhu"]
+[ext_resource type="PackedScene" uid="uid://caflfepqy0x1i" path="res://Common/TurnBasedManager/turn_based_manager.tscn" id="5_eatfm"]
+[ext_resource type="PackedScene" uid="uid://c07wpn2t0m4r8" path="res://Entities/Beetle/Beetle.tscn" id="5_v5oib"]
+
+[sub_resource type="Resource" id="Resource_5ttof"]
+script = ExtResource("4_0wo26")
+health = 20
+movement = 5
+initiative = 5
+metadata/_custom_type_script = "uid://bihb7vjbs5g22"
+
+[node name="TurnBasedTest" type="Node2D"]
+script = ExtResource("1_egmog")
+
+[node name="EntityManager" type="Node" parent="."]
+script = ExtResource("2_gsxb6")
+metadata/_custom_type_script = "uid://d35n776286ed5"
+
+[node name="Player" parent="EntityManager" node_paths=PackedStringArray("layer0") instance=ExtResource("4_rljhu")]
+stats = SubResource("Resource_5ttof")
+layer0 = NodePath("../../TileMapLayer")
+
+[node name="Beetle" parent="EntityManager" node_paths=PackedStringArray("level_manager") instance=ExtResource("5_v5oib")]
+level_manager = NodePath("../..")
+
+[node name="Beetle2" parent="EntityManager" node_paths=PackedStringArray("level_manager") instance=ExtResource("5_v5oib")]
+level_manager = NodePath("../..")
+
+[node name="TileMapLayer" parent="." instance=ExtResource("3_vrdeg")]
+
+[node name="TileMapLayer2" parent="." instance=ExtResource("3_vrdeg")]
+script = null
+
+[node name="TurnBasedManager" parent="." node_paths=PackedStringArray("level_manager") instance=ExtResource("5_eatfm")]
+level_manager = NodePath("..")

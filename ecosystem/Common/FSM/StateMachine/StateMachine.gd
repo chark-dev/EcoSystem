@@ -19,7 +19,6 @@ func change_state(new_state : State):
 	if current_state:
 		current_state.exit()
 		
-		print(current_state)
 		current_state = new_state
 		current_state.enter()
 

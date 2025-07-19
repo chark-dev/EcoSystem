@@ -6,7 +6,6 @@ var idle_timer = 0.0
 
 func process_physics(delta):
 	idle_timer -= delta
-	print(idle_timer)
 	if idle_timer <= 0.0:
 		return search_state
 	return null
