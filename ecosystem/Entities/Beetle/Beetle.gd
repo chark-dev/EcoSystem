@@ -4,9 +4,17 @@ class_name Beetle
 enum TurnState { IDLE, MOVING, ACTING }
 var turn_state : TurnState = TurnState.IDLE
 
+@export var sleep_timer : float = 35
+@export var death_timer : float = 500
+
+
+
 
 @export var level_manager : LevelManager
+
 @onready var state_machine = $StateMachine
+@export var death_state : Death
+
 @export var utility_ai : UtilityAI
 @export var stats : CreatureStats
 
@@ -15,6 +23,9 @@ var turn_state : TurnState = TurnState.IDLE
 var is_moving = false
 var current_path : Array[Vector2i]
 var current_point_path
+
+
+var hide_places = []
 
 func _ready():
 	add_to_group("actors")
@@ -25,20 +36,11 @@ func _ready():
 
 
 func _physics_process(delta: float) -> void:
-	#match turn_state:
-		#TurnState.MOVING:
-			#var finished = move()
-			#if finished:
-				#turn_state = TurnState.ACTING
-		#
-		#TurnState.ACTING:
-			#execute_action()
-			#SignalBus.turn_complete.emit()
-			#print("Beetle emitted turn_complete")
-			#turn_state = TurnState.IDLE  # Reset for next turn
+	sleep_timer -= delta
+	death_timer -= delta
 	
-	if level_manager.combat:
-		return
+	if death_timer <= 0:
+		state_machine.change_state(death_state)
 	
 	state_machine.process_physics(delta)
 

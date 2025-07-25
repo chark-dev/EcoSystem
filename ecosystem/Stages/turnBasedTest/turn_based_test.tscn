@@ -16,6 +16,7 @@ movement = 5
 initiative = 5
 courage = 0
 hunger = 0
+gender = 0
 metadata/_custom_type_script = "uid://bihb7vjbs5g22"
 
 [node name="TurnBasedTest" type="Node2D" node_paths=PackedStringArray("tile_map", "TBmanager", "EManager", "player")]
@@ -35,23 +36,34 @@ layer0 = NodePath("../../TileMapLayer")
 layer1 = NodePath("../../TileMapLayer2")
 
 [node name="Beetle" parent="EntityManager" node_paths=PackedStringArray("level_manager") instance=ExtResource("5_v5oib")]
-position = Vector2(94, 22)
 level_manager = NodePath("../..")
 
 [node name="Beetle2" parent="EntityManager" node_paths=PackedStringArray("level_manager") instance=ExtResource("5_v5oib")]
-position = Vector2(-65, 64)
 level_manager = NodePath("../..")
 
 [node name="Beetle3" parent="EntityManager" node_paths=PackedStringArray("level_manager") instance=ExtResource("5_v5oib")]
-position = Vector2(-65, 64)
 level_manager = NodePath("../..")
 
 [node name="Beetle4" parent="EntityManager" node_paths=PackedStringArray("level_manager") instance=ExtResource("5_v5oib")]
-position = Vector2(-65, 64)
 level_manager = NodePath("../..")
 
 [node name="Beetle5" parent="EntityManager" node_paths=PackedStringArray("level_manager") instance=ExtResource("5_v5oib")]
-position = Vector2(-65, 64)
+level_manager = NodePath("../..")
+
+[node name="Beetle6" parent="EntityManager" node_paths=PackedStringArray("level_manager") instance=ExtResource("5_v5oib")]
+level_manager = NodePath("../..")
+
+[node name="Beetle7" parent="EntityManager" node_paths=PackedStringArray("level_manager") instance=ExtResource("5_v5oib")]
+level_manager = NodePath("../..")
+
+[node name="Beetle8" parent="EntityManager" node_paths=PackedStringArray("level_manager") instance=ExtResource("5_v5oib")]
+level_manager = NodePath("../..")
+
+[node name="Beetle9" parent="EntityManager" node_paths=PackedStringArray("level_manager") instance=ExtResource("5_v5oib")]
+level_manager = NodePath("../..")
+
+[node name="Beetle10" parent="EntityManager" node_paths=PackedStringArray("level_manager") instance=ExtResource("5_v5oib")]
+sleep_timer = 10.0
 level_manager = NodePath("../..")
 
 [node name="TileMapLayer" parent="." instance=ExtResource("3_vrdeg")]

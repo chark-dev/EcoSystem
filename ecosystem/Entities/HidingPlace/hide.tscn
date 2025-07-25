@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://d14tsc1ch820x"]
+
+[ext_resource type="Script" uid="uid://bbu7dwdwcpbmj" path="res://Entities/HidingPlace/hide.gd" id="1_5pgfk"]
+[ext_resource type="Texture2D" uid="uid://va5pipkwnwsc" path="res://joint.png" id="1_i4ial"]
+
+[node name="Hide" type="Sprite2D"]
+texture = ExtResource("1_i4ial")
+script = ExtResource("1_5pgfk")

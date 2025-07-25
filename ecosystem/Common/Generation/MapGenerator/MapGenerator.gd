@@ -11,7 +11,7 @@ var altitude = FastNoiseLite.new()
 
 @onready var food_scene = preload("res://Entities/Food/Food.tscn")
 @onready var smell_scene = preload("res://Entities/Smell/Smell.tscn")
-@onready var hide_scene = preload("res://Entities/Chest/Chest.tscn")
+@onready var hide_scene = preload("res://Entities/HidingPlace/hide.tscn")
 
 var smell_map = []
 var food_map = []
@@ -46,22 +46,24 @@ func generate_chunk(target_origin):
 #			SETTING UP TILESET IN A 2D GRAPH CORRESPONDING TO THESE VALUES GIVES US 
 			set_cell(Vector2i(tile_pos.x - width/2 + x, tile_pos.y - height/2 + y), 0, Vector2(round(moist+10)/5,0))
 			
-			if alt < 1:
+			if alt < 0.1:
 				set_cell(Vector2i(tile_pos.x - width/2 + x, tile_pos.y - height/2 + y), 0, Vector2(0,0))
 			else:
 				set_cell(Vector2i(tile_pos.x - width/2 + x, tile_pos.y - height/2 + y), 0, Vector2(round(moist+10)/5,0))
 				spawn_food(Vector2i(tile_pos.x - width/2 + x, tile_pos.y - height/2 + y))
+				spawn_hide_place(Vector2i(tile_pos.x - width/2 + x, tile_pos.y - height/2 + y))
 
 
 func spawn_hide_place(tile_pos: Vector2i):
-	if randf() < 0.01:
+	if randf() < 0.05:
 		var hide_spot = hide_scene.instantiate()
 		hide_spot.position = map_to_local(tile_pos)
+		hide_spot.hide_source_tile = tile_pos
 		add_child(hide_spot)
 		hide_map.append(hide_spot)
 
 func spawn_food(tile_pos: Vector2i):
-	if randf() < 0.01:
+	if randf() < 0.05:
 		var food = food_scene.instantiate()
 		food.position = map_to_local(tile_pos)
 		add_child(food)

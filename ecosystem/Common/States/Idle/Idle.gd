@@ -3,9 +3,12 @@ class_name Idle
 
 var idle_timer = 0.0
 @export var search_state : Search
+@export var hide_state : Hide
 
 func process_physics(delta):
 	idle_timer -= delta
+	if parent.sleep_timer <= 0:
+		return hide_state
 	if idle_timer <= 0.0:
 		return search_state
 	return null
