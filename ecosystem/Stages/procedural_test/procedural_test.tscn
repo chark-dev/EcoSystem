@@ -16,13 +16,12 @@ movement = 5
 initiative = 10
 metadata/_custom_type_script = "uid://bihb7vjbs5g22"
 
-[node name="ProceduralTest" type="Node2D" node_paths=PackedStringArray("tile_map", "TBmanager", "EManager", "player", "inventory_interface")]
+[node name="ProceduralTest" type="Node2D" node_paths=PackedStringArray("tile_map", "TBmanager", "EManager", "player")]
 script = ExtResource("1_q82ol")
 tile_map = NodePath("")
 TBmanager = NodePath("")
 EManager = NodePath("EntityManager")
 player = NodePath("EntityManager/Player")
-inventory_interface = NodePath("CanvasLayer/InventoryInterface")
 
 [node name="TileMapLayer" parent="." instance=ExtResource("2_bbpfa")]
 

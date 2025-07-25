@@ -11,8 +11,11 @@ var altitude = FastNoiseLite.new()
 
 @onready var food_scene = preload("res://Entities/Food/Food.tscn")
 @onready var smell_scene = preload("res://Entities/Smell/Smell.tscn")
+@onready var hide_scene = preload("res://Entities/Chest/Chest.tscn")
 
 var smell_map = []
+var food_map = []
+var hide_map = []
 
 
 func init() -> void:
@@ -50,29 +53,39 @@ func generate_chunk(target_origin):
 				spawn_food(Vector2i(tile_pos.x - width/2 + x, tile_pos.y - height/2 + y))
 
 
-func spawn_food(tile_pos : Vector2i):
+func spawn_hide_place(tile_pos: Vector2i):
+	if randf() < 0.01:
+		var hide_spot = hide_scene.instantiate()
+		hide_spot.position = map_to_local(tile_pos)
+		add_child(hide_spot)
+		hide_map.append(hide_spot)
+
+func spawn_food(tile_pos: Vector2i):
 	if randf() < 0.01:
 		var food = food_scene.instantiate()
 		food.position = map_to_local(tile_pos)
 		add_child(food)
 		add_smell(tile_pos)
 
+		# Store a dictionary with position and reference to node
+		food_map.append({
+			"tile": tile_pos,
+			"node": food
+		})
+
 func add_smell(center: Vector2i):
-	
-	var offsets = [  # center
-	Vector2i( 1,  1),  # top-right
-	Vector2i(-1,  1),  # top-left
-	Vector2i( 1, -1),  # bottom-right
-	Vector2i(-1, -1),  # bottom-left
-	Vector2i(-1,  0),  # left
-	Vector2i( 0, -1),  # down
-	Vector2i( 0,  1),  # up
-	Vector2i( 1,  0),  # right
+	var offsets = [
+		Vector2i( 0,  0),  # include center tile
+		Vector2i( 1,  1), Vector2i(-1,  1),
+		Vector2i( 1, -1), Vector2i(-1, -1),
+		Vector2i(-1,  0), Vector2i( 0, -1),
+		Vector2i( 0,  1), Vector2i( 1,  0),
 	]
 	
 	for offset in offsets:
 		var pos = center + offset
 		var smell = smell_scene.instantiate()
-		smell_map.append(pos)
 		smell.position = map_to_local(pos)
+		smell.food_source_tile = center  # new property to track source
 		add_child(smell)
+		smell_map.append(smell)

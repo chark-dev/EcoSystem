@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c07wpn2t0m4r8"]
+[gd_scene load_steps=16 format=3 uid="uid://c07wpn2t0m4r8"]
 
 [ext_resource type="Script" uid="uid://gle08c5vhkv" path="res://Entities/Beetle/Beetle.gd" id="1_1xcpe"]
 [ext_resource type="Script" uid="uid://t1u03opvyfvy" path="res://Common/FSM/StateMachine/StateMachine.gd" id="2_wbhil"]
@@ -7,20 +7,29 @@
 [ext_resource type="Script" uid="uid://d3dcthbo4nfym" path="res://Common/States/Search/Search.gd" id="4_xosba"]
 [ext_resource type="Script" uid="uid://326cre4fg4bd" path="res://Common/States/Hide/Hide.gd" id="5_qh35w"]
 [ext_resource type="Script" uid="uid://6o1mvc3tgc7p" path="res://Common/States/Feed/Feed.gd" id="6_rf0ry"]
+[ext_resource type="Script" uid="uid://cmr0dx3ok8cc2" path="res://Common/States/Grouping/grouping.gd" id="8_lvn5b"]
 [ext_resource type="Script" uid="uid://bihb7vjbs5g22" path="res://Resources/Stats/creaturestats.gd" id="8_qh35w"]
+[ext_resource type="Script" uid="uid://b5ss3rg1vx806" path="res://Common/States/Mating/Mating.gd" id="9_a66yo"]
+[ext_resource type="Script" uid="uid://cxdypo8620jaa" path="res://Entities/UtilityAI/UtilityAI.gd" id="9_rf0ry"]
+[ext_resource type="Script" uid="uid://c1nts1ybf5tbu" path="res://Common/States/Sleeping/sleeping.gd" id="10_a66yo"]
+[ext_resource type="Script" uid="uid://s1cxixgvxlcq" path="res://Entities/Beetle/death.gd" id="11_uj1el"]
 
 [sub_resource type="Resource" id="Resource_qh35w"]
 script = ExtResource("8_qh35w")
 health = 5
+max_health = 0
 movement = 5
 initiative = 5
+courage = 2
+hunger = 3
 metadata/_custom_type_script = "uid://bihb7vjbs5g22"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d5sba"]
 radius = 3.60555
 
-[node name="Beetle" type="CharacterBody2D"]
+[node name="Beetle" type="CharacterBody2D" node_paths=PackedStringArray("utility_ai") groups=["prey"]]
 script = ExtResource("1_1xcpe")
+utility_ai = NodePath("UtilityAI")
 stats = SubResource("Resource_qh35w")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("start_state")]
@@ -45,6 +54,18 @@ script = ExtResource("5_qh35w")
 script = ExtResource("6_rf0ry")
 idle_state = NodePath("../Idle")
 
+[node name="Grouping" type="Node" parent="StateMachine"]
+script = ExtResource("8_lvn5b")
+
+[node name="Mating" type="Node" parent="StateMachine"]
+script = ExtResource("9_a66yo")
+
+[node name="Sleeping" type="Node" parent="StateMachine"]
+script = ExtResource("10_a66yo")
+
+[node name="Death" type="Node" parent="StateMachine"]
+script = ExtResource("11_uj1el")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("4_v4kka")
 
@@ -56,3 +77,6 @@ offset_left = -36.0
 offset_top = -31.0
 offset_right = 40.0
 offset_bottom = -8.0
+
+[node name="UtilityAI" type="Node" parent="."]
+script = ExtResource("9_rf0ry")

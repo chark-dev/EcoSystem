@@ -3,7 +3,10 @@ class_name TurnBasedManager
 
 @export var level_manager : LevelManager
 var queue : Array
+var completed = false
  
+func _ready():
+	SignalBus.turn_complete.connect(on_turn_complete)
 
 func init_combat():
 	randomize()
@@ -39,11 +42,23 @@ func do_turn():
 	
 	
 	# INSTEAD HERE WE NEED TO AWAIT A SIGNAL FROM THE BEETLE
-	await get_tree().create_timer(3.0).timeout  # Wait 3 seconds
-
+	print("Waiting for turn_complete signal...")
+	await completed == true
+	print("Received turn_complete signal!")
+	
+	
+	
+	await get_tree().create_timer(5.0).timeout
+	
+	
+	completed = false
 	# Advance to next creature
 	current_index += 1
 	if current_index >= queue.size():
 		current_index = 0  # Loop back to start
 
 	await do_turn()
+
+
+func on_turn_complete():
+	completed = true

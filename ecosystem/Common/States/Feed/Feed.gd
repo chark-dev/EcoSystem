@@ -17,7 +17,9 @@ func exit():
 func process_physics(delta):
 	
 #	Think I need to change this to be local position as it stops as soon as it gets into the square. 
-	if level_manager.tile_map.local_to_map(parent.global_position) == food_position:
+	if parent.global_position == level_manager.tile_map.map_to_local(food_position):
+		eat_food_at_tile(food_position)
+		# EAT FOOD 
 		return idle_state
 	
 	
@@ -30,3 +32,29 @@ func feed():
 	
 	if path.is_empty() == false:
 		parent.current_path = path
+
+
+func eat_food_at_tile(tile_pos: Vector2i) -> void:
+	var tile_world_pos = level_manager.tile_map.map_to_local(tile_pos)
+
+	# Use the food_map directly
+	for i in range(level_manager.tile_map.food_map.size()):
+		var entry = level_manager.tile_map.food_map[i]
+		if entry["tile"] == tile_pos:
+			entry["node"].queue_free()
+			print("Removed Food.")
+			level_manager.tile_map.food_map.remove_at(i)
+			parent.stats.hunger -= 1
+			print("Beetle ate food at ", tile_pos)
+
+			# 🧼 Remove smells associated with this food tile
+			var smells_to_remove = []
+			for smell in level_manager.tile_map.smell_map:
+				if smell.food_source_tile == tile_pos:
+					smells_to_remove.append(smell)
+
+			for smell in smells_to_remove:
+				level_manager.tile_map.smell_map.erase(smell)
+				smell.queue_free()
+
+			break

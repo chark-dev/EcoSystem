@@ -7,7 +7,7 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_w538m"]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["predator"]]
 script = ExtResource("1_4vru1")
 inventory_data = ExtResource("2_6l2p1")
 

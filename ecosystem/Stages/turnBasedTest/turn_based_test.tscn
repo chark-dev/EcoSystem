@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://dfrktvmuv0hpc"]
 
-[ext_resource type="Script" uid="uid://dalsdmxwll2n" path="res://Stages/turnBasedTest/TurnBasedTest.gd" id="1_egmog"]
+[ext_resource type="Script" uid="uid://l0dhwym56si4" path="res://Common/LevelManager/LevelManager.gd" id="1_0wo26"]
 [ext_resource type="Script" uid="uid://d35n776286ed5" path="res://Common/EntityManager/EntityManager.gd" id="2_gsxb6"]
 [ext_resource type="PackedScene" uid="uid://cbrd0qbaii6or" path="res://Stages/tilesets/tile_map_layer.tscn" id="3_vrdeg"]
 [ext_resource type="Script" uid="uid://bihb7vjbs5g22" path="res://Resources/Stats/creaturestats.gd" id="4_0wo26"]
@@ -11,25 +11,47 @@
 [sub_resource type="Resource" id="Resource_5ttof"]
 script = ExtResource("4_0wo26")
 health = 20
+max_health = 0
 movement = 5
 initiative = 5
+courage = 0
+hunger = 0
 metadata/_custom_type_script = "uid://bihb7vjbs5g22"
 
-[node name="TurnBasedTest" type="Node2D"]
-script = ExtResource("1_egmog")
+[node name="TurnBasedTest" type="Node2D" node_paths=PackedStringArray("tile_map", "TBmanager", "EManager", "player")]
+script = ExtResource("1_0wo26")
+tile_map = NodePath("TileMapLayer")
+TBmanager = NodePath("TurnBasedManager")
+EManager = NodePath("EntityManager")
+player = NodePath("EntityManager/Player")
 
 [node name="EntityManager" type="Node" parent="."]
 script = ExtResource("2_gsxb6")
 metadata/_custom_type_script = "uid://d35n776286ed5"
 
-[node name="Player" parent="EntityManager" node_paths=PackedStringArray("layer0") instance=ExtResource("4_rljhu")]
+[node name="Player" parent="EntityManager" node_paths=PackedStringArray("layer0", "layer1") instance=ExtResource("4_rljhu")]
 stats = SubResource("Resource_5ttof")
 layer0 = NodePath("../../TileMapLayer")
+layer1 = NodePath("../../TileMapLayer2")
 
 [node name="Beetle" parent="EntityManager" node_paths=PackedStringArray("level_manager") instance=ExtResource("5_v5oib")]
+position = Vector2(94, 22)
 level_manager = NodePath("../..")
 
 [node name="Beetle2" parent="EntityManager" node_paths=PackedStringArray("level_manager") instance=ExtResource("5_v5oib")]
+position = Vector2(-65, 64)
+level_manager = NodePath("../..")
+
+[node name="Beetle3" parent="EntityManager" node_paths=PackedStringArray("level_manager") instance=ExtResource("5_v5oib")]
+position = Vector2(-65, 64)
+level_manager = NodePath("../..")
+
+[node name="Beetle4" parent="EntityManager" node_paths=PackedStringArray("level_manager") instance=ExtResource("5_v5oib")]
+position = Vector2(-65, 64)
+level_manager = NodePath("../..")
+
+[node name="Beetle5" parent="EntityManager" node_paths=PackedStringArray("level_manager") instance=ExtResource("5_v5oib")]
+position = Vector2(-65, 64)
 level_manager = NodePath("../..")
 
 [node name="TileMapLayer" parent="." instance=ExtResource("3_vrdeg")]

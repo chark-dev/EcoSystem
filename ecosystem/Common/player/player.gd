@@ -21,6 +21,7 @@ var is_moving: bool = false
 
 
 func _ready() -> void:
+	add_to_group("actors")
 	
 	# Snap initial position to tile center
 	var current_tile = layer0.local_to_map(global_position)

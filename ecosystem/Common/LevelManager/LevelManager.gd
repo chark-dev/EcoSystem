@@ -12,12 +12,14 @@ var astar_grid : AStarGrid2D
 
 
 @export var player: Player 
-@export var inventory_interface: Control 
+#@export var inventory_interface: Control 
+
 
 
 var hovered_entity
 
-func init():
+func _ready():
+	tile_map.init()
 	astar_grid = AStarGrid2D.new()
 	astar_grid.region = tile_map.get_used_rect()
 	
@@ -25,31 +27,6 @@ func init():
 	
 	astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
 	astar_grid.update()
-	
-	inventory_init()
-	
-
-func _ready():
-	player.toggle_inventory.connect(toggle_inventory_interface)
-	
-
-func inventory_init():
-	inventory_interface.set_player_inventory_data(player.inventory_data)
-	
-	for node in get_tree().get_nodes_in_group("external_inventory"):
-		node.toggle_inventory.connect(toggle_inventory_interface)
-
-func set_hovered_entity(entity):
-	hovered_entity = entity
-	print(hovered_entity)
-
-
-func toggle_inventory_interface(external_inventory_owner = null):
-	inventory_interface.visible = not inventory_interface.visible
-	
-	if external_inventory_owner:
-		inventory_interface.set_external_inventory(external_inventory_owner)
-
 
 func get_actor_path(current_pos, target_pos):
 	
@@ -65,6 +42,8 @@ func get_actor_path(current_pos, target_pos):
 	
 	
 	return id_path
+
+
 
 func convert_path(target: Vector2i):
 	return tile_map.map_to_local(target)
@@ -88,7 +67,46 @@ func highlight_tiles(tiles):
 		add_child(polygon)
 
 
+func get_heuristic_tiles(is_predator : bool, creature) -> Dictionary:
+	var tile_dict = {}
+	
+	if not is_predator:
+		var predator_tiles = get_predator_tiles()
+		tile_dict["predator_tiles"] = predator_tiles
+#	Get Player Tile 
 
+#   Get Ally Tiles
+	var ally_tiles = get_ally_tiles(creature)
+	if ally_tiles:
+		tile_dict["ally_tiles"] = ally_tiles
+	
+	print(tile_dict)
+	
+	return tile_dict
+
+func get_ally_tiles(creature : CharacterBody2D):
+	var output : Array[Vector2i]
+	var creatures = get_tree().get_nodes_in_group("prey")
+	if creatures:
+		for c in creatures:
+			if c.get_class() == creature.get_class():
+				var tile_pos = tile_map.local_to_map(c.global_position)
+				output.append(tile_pos)
+		return output
+	else:
+		return []
+
+
+func get_predator_tiles() -> Array[Vector2i]:
+	var output : Array[Vector2i]
+	var predators = get_tree().get_nodes_in_group("predator")
+	if predators:
+		for predator in predators:
+			var tile_pos = tile_map.local_to_map(predator.global_position)
+			output.append(tile_pos)
+		return output
+	else:
+		return []
 
 func get_creatures():
 	return EManager.get_entities()
