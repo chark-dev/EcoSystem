@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MenuItem" load_steps=3 format=3 uid="uid://bilp8om4mk0or"]
+
+[ext_resource type="Script" uid="uid://bbhchfnnwvf6q" path="res://Common/Inventory/MenuItems/menu_item.gd" id="1_l4a7y"]
+[ext_resource type="Texture2D" uid="uid://ccfxx0jd786q1" path="res://Resources/Items/item_atlas.tres" id="2_qxqf2"]
+
+[resource]
+script = ExtResource("1_l4a7y")
+type = 0
+name = "BeetleButton"
+description = ""
+stackable = false
+texture = ExtResource("2_qxqf2")
+metadata/_custom_type_script = "uid://bbhchfnnwvf6q"

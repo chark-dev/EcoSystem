@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cdr3os57mbjgi"]
 
 [ext_resource type="Script" uid="uid://bv8dss0lher1c" path="res://UI/Slot/Slot.gd" id="1_oy4e3"]
-[ext_resource type="FontFile" uid="uid://dt8ysp514avn2" path="res://Assets/brackeys_platformer_assets/fonts/PixelOperator8.ttf" id="2_1eicd"]
+[ext_resource type="FontFile" uid="uid://dq3lan062wa27" path="res://PixelOperator8.ttf" id="2_1eicd"]
 
 [node name="Slot" type="PanelContainer" node_paths=PackedStringArray("texture_rect", "quantity_label")]
 custom_minimum_size = Vector2(32, 32)

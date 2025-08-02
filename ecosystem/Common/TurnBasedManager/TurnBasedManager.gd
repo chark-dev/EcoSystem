@@ -6,7 +6,7 @@ var queue : Array
 var completed = false
  
 func _ready():
-	SignalBus.turn_complete.connect(on_turn_complete)
+	Global.turn_complete.connect(on_turn_complete)
 
 func init_combat():
 	randomize()

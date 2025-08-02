@@ -21,7 +21,9 @@ func process_physics(delta):
 	return null
 
 func enter():
-	target_hide_tile = get_closest_hide_tile()
+	var tile = get_closest_hide_tile()
+	if tile:
+		target_hide_tile = tile
 	hide()
 	pass
 

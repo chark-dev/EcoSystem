@@ -1,6 +1,7 @@
 extends Node2D
 class_name LevelManager 
 
+var data : Dictionary 
 
 var combat = false
 
@@ -9,9 +10,9 @@ var astar_grid : AStarGrid2D
 
 @export var TBmanager : TurnBasedManager
 @export var EManager : EntityManager
+@export var I_data : InventoryData
 
 
-@export var player: Player 
 #@export var inventory_interface: Control 
 
 
@@ -19,6 +20,9 @@ var astar_grid : AStarGrid2D
 var hovered_entity
 
 func _ready():
+	var data = Global.ecosystem_data
+	
+	
 	tile_map.init()
 	astar_grid = AStarGrid2D.new()
 	astar_grid.region = tile_map.get_used_rect()

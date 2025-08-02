@@ -21,6 +21,7 @@ var turn_state : TurnState = TurnState.IDLE
 @onready var label = $Label
 
 var is_moving = false
+var is_highlighted = false
 var current_path : Array[Vector2i]
 var current_point_path
 
@@ -33,6 +34,11 @@ func _ready():
 	utility_ai.init(self)
 	var current_tile = level_manager.tile_map.local_to_map(global_position)
 	global_position = level_manager.tile_map.map_to_local(current_tile)
+	Global.connect("beetle_highlight", highlight)
+	
+	var mat = $Sprite2D.material
+	if mat and mat is ShaderMaterial:
+		mat.set_shader_parameter("highlight_enabled", false)
 
 
 func _physics_process(delta: float) -> void:
@@ -98,3 +104,10 @@ func take_turn():
 func execute_action():
 	print("Attacking")
 	pass
+
+
+func highlight():
+	var mat = $Sprite2D.material
+	if mat and mat is ShaderMaterial:
+		mat.set_shader_parameter("highlight_enabled", !is_highlighted)
+		is_highlighted = !is_highlighted

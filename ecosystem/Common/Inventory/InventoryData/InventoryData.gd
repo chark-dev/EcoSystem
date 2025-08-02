@@ -51,5 +51,15 @@ func drop_single_slot_data(grabbed_slot_data: SlotData, index: int) -> SlotData:
 	
 
 
+func use_slot_data(index):
+	var slot_data = slot_datas[index]
+	
+	if not slot_data:
+		return 
+		
+	
+	Global.use_slot_data(slot_data)
+
+
 func  on_slot_clicked(index: int, button: int):
 	inventory_interact.emit(self, index, button)

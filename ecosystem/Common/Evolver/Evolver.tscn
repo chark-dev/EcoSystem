@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://2vuctut2ap3k"]
+
+[ext_resource type="Script" uid="uid://bkfpr8q8iy0j" path="res://Common/Evolver/Evolver.gd" id="1_sltwm"]
+
+[node name="Node2D" type="Node"]
+script = ExtResource("1_sltwm")

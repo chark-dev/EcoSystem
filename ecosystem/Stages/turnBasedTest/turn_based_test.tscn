@@ -1,12 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://dfrktvmuv0hpc"]
+[gd_scene load_steps=10 format=3 uid="uid://dfrktvmuv0hpc"]
 
 [ext_resource type="Script" uid="uid://l0dhwym56si4" path="res://Common/LevelManager/LevelManager.gd" id="1_0wo26"]
 [ext_resource type="Script" uid="uid://d35n776286ed5" path="res://Common/EntityManager/EntityManager.gd" id="2_gsxb6"]
 [ext_resource type="PackedScene" uid="uid://cbrd0qbaii6or" path="res://Stages/tilesets/tile_map_layer.tscn" id="3_vrdeg"]
 [ext_resource type="Script" uid="uid://bihb7vjbs5g22" path="res://Resources/Stats/creaturestats.gd" id="4_0wo26"]
 [ext_resource type="PackedScene" uid="uid://e2timugao8yh" path="res://Common/player/player.tscn" id="4_rljhu"]
+[ext_resource type="PackedScene" uid="uid://dpy8ah0mw8qu0" path="res://Entities/Rabbit/Rabbit.tscn" id="5_0wo26"]
 [ext_resource type="PackedScene" uid="uid://caflfepqy0x1i" path="res://Common/TurnBasedManager/turn_based_manager.tscn" id="5_eatfm"]
-[ext_resource type="PackedScene" uid="uid://c07wpn2t0m4r8" path="res://Entities/Beetle/Beetle.tscn" id="5_v5oib"]
 
 [sub_resource type="Resource" id="Resource_5ttof"]
 script = ExtResource("4_0wo26")
@@ -14,6 +14,17 @@ health = 20
 max_health = 0
 movement = 5
 initiative = 5
+courage = 0
+hunger = 0
+gender = 0
+metadata/_custom_type_script = "uid://bihb7vjbs5g22"
+
+[sub_resource type="Resource" id="Resource_v5oib"]
+script = ExtResource("4_0wo26")
+health = 4
+max_health = 0
+movement = 0
+initiative = 0
 courage = 0
 hunger = 0
 gender = 0
@@ -35,36 +46,9 @@ stats = SubResource("Resource_5ttof")
 layer0 = NodePath("../../TileMapLayer")
 layer1 = NodePath("../../TileMapLayer2")
 
-[node name="Beetle" parent="EntityManager" node_paths=PackedStringArray("level_manager") instance=ExtResource("5_v5oib")]
+[node name="Rabbit" parent="EntityManager" node_paths=PackedStringArray("level_manager") instance=ExtResource("5_0wo26")]
 level_manager = NodePath("../..")
-
-[node name="Beetle2" parent="EntityManager" node_paths=PackedStringArray("level_manager") instance=ExtResource("5_v5oib")]
-level_manager = NodePath("../..")
-
-[node name="Beetle3" parent="EntityManager" node_paths=PackedStringArray("level_manager") instance=ExtResource("5_v5oib")]
-level_manager = NodePath("../..")
-
-[node name="Beetle4" parent="EntityManager" node_paths=PackedStringArray("level_manager") instance=ExtResource("5_v5oib")]
-level_manager = NodePath("../..")
-
-[node name="Beetle5" parent="EntityManager" node_paths=PackedStringArray("level_manager") instance=ExtResource("5_v5oib")]
-level_manager = NodePath("../..")
-
-[node name="Beetle6" parent="EntityManager" node_paths=PackedStringArray("level_manager") instance=ExtResource("5_v5oib")]
-level_manager = NodePath("../..")
-
-[node name="Beetle7" parent="EntityManager" node_paths=PackedStringArray("level_manager") instance=ExtResource("5_v5oib")]
-level_manager = NodePath("../..")
-
-[node name="Beetle8" parent="EntityManager" node_paths=PackedStringArray("level_manager") instance=ExtResource("5_v5oib")]
-level_manager = NodePath("../..")
-
-[node name="Beetle9" parent="EntityManager" node_paths=PackedStringArray("level_manager") instance=ExtResource("5_v5oib")]
-level_manager = NodePath("../..")
-
-[node name="Beetle10" parent="EntityManager" node_paths=PackedStringArray("level_manager") instance=ExtResource("5_v5oib")]
-sleep_timer = 10.0
-level_manager = NodePath("../..")
+stats = SubResource("Resource_v5oib")
 
 [node name="TileMapLayer" parent="." instance=ExtResource("3_vrdeg")]
 

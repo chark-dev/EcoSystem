@@ -1,0 +1,61 @@
+[gd_scene load_steps=11 format=3 uid="uid://dpy8ah0mw8qu0"]
+
+[ext_resource type="Script" uid="uid://t1u03opvyfvy" path="res://Common/FSM/StateMachine/StateMachine.gd" id="1_24a0s"]
+[ext_resource type="Script" uid="uid://bcff6gykh67ru" path="res://Entities/Rabbit/rabbit.gd" id="1_ikes2"]
+[ext_resource type="Script" uid="uid://xe58gcoeftkt" path="res://Entities/Rabbit/rabbit_idle.gd" id="3_qiwvh"]
+[ext_resource type="Script" uid="uid://dwdqsyr2u1tkj" path="res://Entities/Rabbit/search.gd" id="4_1qgti"]
+[ext_resource type="Script" uid="uid://dnlfuywk17qcn" path="res://Entities/Rabbit/hide.gd" id="4_kjw0b"]
+[ext_resource type="Script" uid="uid://d3380i4kv8ayd" path="res://Entities/Rabbit/sleeping.gd" id="4_mtir0"]
+[ext_resource type="Script" uid="uid://s1cxixgvxlcq" path="res://Entities/Beetle/death.gd" id="4_yg0qy"]
+[ext_resource type="Script" uid="uid://d1dt5bpd2p35o" path="res://Entities/Rabbit/feed.gd" id="6_tr8io"]
+[ext_resource type="Script" uid="uid://bm2yoi6d7xaru" path="res://Entities/Rabbit/mating.gd" id="7_gcmjl"]
+[ext_resource type="Script" uid="uid://o2gksb4h4r6q" path="res://Entities/Rabbit/create_home.gd" id="10_brxdb"]
+
+[node name="Rabbit" type="CharacterBody2D" node_paths=PackedStringArray("death_state")]
+script = ExtResource("1_ikes2")
+death_state = NodePath("StateMachine/Death")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("start_state")]
+script = ExtResource("1_24a0s")
+start_state = NodePath("Idle")
+metadata/_custom_type_script = "uid://t1u03opvyfvy"
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("search_state", "hide_state")]
+script = ExtResource("3_qiwvh")
+search_state = NodePath("../Search")
+hide_state = NodePath("../Hide")
+
+[node name="Search" type="Node" parent="StateMachine" node_paths=PackedStringArray("feed_state", "idle_state")]
+script = ExtResource("4_1qgti")
+feed_state = NodePath("../Feed")
+idle_state = NodePath("../Idle")
+search_range = 8
+
+[node name="Hide" type="Node" parent="StateMachine" node_paths=PackedStringArray("sleep_state")]
+script = ExtResource("4_kjw0b")
+sleep_state = NodePath("../Sleeping")
+
+[node name="Feed" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state")]
+script = ExtResource("6_tr8io")
+idle_state = NodePath("../Idle")
+
+[node name="Mating" type="Node" parent="StateMachine"]
+script = ExtResource("7_gcmjl")
+
+[node name="Sleeping" type="Node" parent="StateMachine"]
+script = ExtResource("4_mtir0")
+
+[node name="Death" type="Node" parent="StateMachine"]
+script = ExtResource("4_yg0qy")
+
+[node name="CreateHome" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state")]
+script = ExtResource("10_brxdb")
+idle_state = NodePath("../Idle")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0

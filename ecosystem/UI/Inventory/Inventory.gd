@@ -5,6 +5,10 @@ const Slot = preload("res://UI/Slot/Slot.tscn")
 
 @export var item_grid: GridContainer
 
+func _ready():
+	var inv_data = preload("res://Resources/TestInv.tres")
+	populate_item_grid(inv_data)
+
 func set_inventory_data(inventory_data: InventoryData):
 	inventory_data.inventory_updated.connect(populate_item_grid)
 	populate_item_grid(inventory_data)

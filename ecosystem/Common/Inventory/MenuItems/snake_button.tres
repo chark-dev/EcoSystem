@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="MenuItem" load_steps=2 format=3 uid="uid://b13nkc8rb1nry"]
+
+[ext_resource type="Script" uid="uid://bbhchfnnwvf6q" path="res://Common/Inventory/MenuItems/menu_item.gd" id="1_8tnkt"]
+
+[resource]
+script = ExtResource("1_8tnkt")
+type = 0
+name = ""
+description = ""
+stackable = false
+metadata/_custom_type_script = "uid://bbhchfnnwvf6q"

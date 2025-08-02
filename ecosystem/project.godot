@@ -11,17 +11,13 @@ config_version=5
 [application]
 
 config/name="Ecosystem"
-run/main_scene="uid://d0m7jke808ne6"
+run/main_scene="uid://qy6tkyd5synh"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-SignalBus="*res://Common/SignalBus/SignalBus.gd"
-
-[debug]
-
-settings/stdout/print_fps=true
+Global="*res://Common/Global/Global.gd"
 
 [display]
 

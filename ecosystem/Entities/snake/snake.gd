@@ -1,22 +1,66 @@
-extends Node2D
-class_name Snake
-
-@onready var points = $Points
+extends CharacterBody2D
+class_name Snake 
 
 
 
+@export var sleep_timer : float = 35
+@export var death_timer : float = 500
 
-func _draw():
-	var joints = points.get_children()
+
+
+
+@export var level_manager : LevelManager
+
+@onready var state_machine = $StateMachine
+@export var death_state : Death
+
+@export var stats : CreatureStats
+
+@onready var label = $Label
+
+var is_moving = false
+var current_path : Array[Vector2i]
+var current_point_path
+
+
+var hide_places = []
+
+func _ready():
+	add_to_group("actors")
+	state_machine.init(self, level_manager)
+	var current_tile = level_manager.tile_map.local_to_map(global_position)
+	global_position = level_manager.tile_map.map_to_local(current_tile)
+
+
+func _physics_process(delta: float) -> void:
+	sleep_timer -= delta
+	death_timer -= delta
 	
-	for joint in joints:
-		draw_circle(joint.position, 1, Color.AQUA, true)
-# Chain that goes through the middle of the body 
-# Circles/Shapes that make up the Body 
-# Shaders that change the colour based on the direction of travel.
+	if death_timer <= 0:
+		state_machine.change_state(death_state)
+	
+	state_machine.process_physics(delta)
 
 
-func _input(event):
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:  # Left mouse button was clicked
-			print("Left mouse button clicked!")
+
+
+func move() -> bool:
+	if current_path.is_empty():
+		return true
+	
+	var target_position = level_manager.convert_path(current_path.front())
+	
+	global_position = global_position.move_toward(target_position, 1)
+	
+	if global_position == target_position:
+		current_path.pop_front()
+	
+	return current_path.is_empty()
+
+
+
+
+
+func execute_action():
+	print("Attacking")
+	pass

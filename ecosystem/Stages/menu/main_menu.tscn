@@ -1,0 +1,76 @@
+[gd_scene load_steps=2 format=3 uid="uid://qy6tkyd5synh"]
+
+[ext_resource type="Script" uid="uid://dcjc1iiu0m71k" path="res://Stages/menu/main_menu.gd" id="1_ef3cf"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ef3cf")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 726.0
+offset_bottom = 381.0
+
+[node name="Ecosystem Name" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Ecosystem Name"
+
+[node name="name_input" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Weather Type" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Weather Type"
+
+[node name="weather_input" type="OptionButton" parent="VBoxContainer"]
+layout_mode = 2
+item_count = 3
+popup/item_0/text = "Sunny"
+popup/item_0/id = 0
+popup/item_1/text = "Rainy"
+popup/item_1/id = 1
+popup/item_2/text = "Stormy"
+popup/item_2/id = 2
+
+[node name="Starting Time" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Starting Time"
+
+[node name="time_input" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+max_value = 24.0
+
+[node name="Beetles Count" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Num of Beetles :"
+
+[node name="beetles_slider" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+max_value = 15.0
+
+[node name="Rabbits Count" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Num of Rabbits : "
+
+[node name="rabbits_slider" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+max_value = 10.0
+
+[node name="Snakes Count" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Num of Snakes :"
+
+[node name="snakes_slider" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+max_value = 3.0
+
+[node name="start_button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Start Simulation
+
+"

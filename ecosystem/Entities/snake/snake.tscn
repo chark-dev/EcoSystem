@@ -1,28 +1,49 @@
-[gd_scene load_steps=2 format=3 uid="uid://cp760ibj4jfmp"]
+[gd_scene load_steps=8 format=3 uid="uid://cp760ibj4jfmp"]
 
 [ext_resource type="Script" uid="uid://wmeho15wci6c" path="res://Entities/snake/snake.gd" id="1_8bwt7"]
+[ext_resource type="Script" uid="uid://t1u03opvyfvy" path="res://Common/FSM/StateMachine/StateMachine.gd" id="2_r5uhb"]
+[ext_resource type="Script" uid="uid://b54ej1m73v4cc" path="res://Entities/snake/idle.gd" id="3_2ofnb"]
+[ext_resource type="Texture2D" uid="uid://bcoo3atah0ic3" path="res://beete.png" id="3_r174m"]
+[ext_resource type="Script" uid="uid://b52tprr46n87j" path="res://Entities/snake/search.gd" id="4_2ofnb"]
+[ext_resource type="Script" uid="uid://b5f40mcb426hm" path="res://Entities/snake/hunt.gd" id="5_qq8ia"]
 
-[node name="Snake" type="Node2D"]
-position = Vector2(64, 42)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r5uhb"]
+
+[node name="Snake" type="CharacterBody2D"]
 script = ExtResource("1_8bwt7")
 
-[node name="Points" type="Node" parent="."]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("start_state")]
+script = ExtResource("2_r5uhb")
+start_state = NodePath("Idle")
+metadata/_custom_type_script = "uid://t1u03opvyfvy"
 
-[node name="Anchor" type="CharacterBody2D" parent="Points"]
-position = Vector2(74, 42)
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("3_2ofnb")
 
-[node name="Anchor2" type="Marker2D" parent="Points"]
-position = Vector2(54, 42)
-gizmo_extents = 0.5
+[node name="Search" type="Node" parent="StateMachine"]
+script = ExtResource("4_2ofnb")
+search_range = null
 
-[node name="Anchor3" type="Marker2D" parent="Points"]
-position = Vector2(65, 42)
-gizmo_extents = 0.5
+[node name="Hide" type="Node" parent="StateMachine"]
 
-[node name="Anchor4" type="Marker2D" parent="Points"]
-position = Vector2(60, 42)
-gizmo_extents = 0.5
+[node name="Hunt" type="Node" parent="StateMachine"]
+script = ExtResource("5_qq8ia")
 
-[node name="Anchor5" type="Marker2D" parent="Points"]
-position = Vector2(69, 42)
-gizmo_extents = 0.5
+[node name="Mating" type="Node" parent="StateMachine"]
+
+[node name="Sleeping" type="Node" parent="StateMachine"]
+
+[node name="Death" type="Node" parent="StateMachine"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
+texture = ExtResource("3_r174m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_r5uhb")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -20.0
+offset_top = -37.0
+offset_right = 20.0
+offset_bottom = -14.0

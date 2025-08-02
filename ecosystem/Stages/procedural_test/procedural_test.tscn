@@ -1,27 +1,25 @@
-[gd_scene load_steps=10 format=3 uid="uid://xec41wru57i0"]
+[gd_scene load_steps=14 format=3 uid="uid://xec41wru57i0"]
 
 [ext_resource type="Script" uid="uid://l0dhwym56si4" path="res://Common/LevelManager/LevelManager.gd" id="1_q82ol"]
 [ext_resource type="TileSet" uid="uid://dexlrlyjvv6ha" path="res://Stages/tilesets/example_tileset.tres" id="1_vnikk"]
 [ext_resource type="PackedScene" uid="uid://cbrd0qbaii6or" path="res://Stages/tilesets/tile_map_layer.tscn" id="2_bbpfa"]
-[ext_resource type="PackedScene" uid="uid://e2timugao8yh" path="res://Common/player/player.tscn" id="2_kjmio"]
+[ext_resource type="Resource" uid="uid://c51pxd5o54bxu" path="res://Resources/TestInv.tres" id="2_ol1jl"]
 [ext_resource type="PackedScene" uid="uid://caflfepqy0x1i" path="res://Common/TurnBasedManager/turn_based_manager.tscn" id="4_bbpfa"]
 [ext_resource type="Script" uid="uid://d35n776286ed5" path="res://Common/EntityManager/EntityManager.gd" id="5_7slxf"]
-[ext_resource type="Script" uid="uid://bihb7vjbs5g22" path="res://Resources/Stats/creaturestats.gd" id="8_bbpfa"]
+[ext_resource type="Script" uid="uid://d4nnfg8hod4dy" path="res://Common/Day_Night/canvas_modulate.gd" id="6_bbpfa"]
+[ext_resource type="PackedScene" uid="uid://c07wpn2t0m4r8" path="res://Entities/Beetle/Beetle.tscn" id="7_jmnst"]
+[ext_resource type="Texture2D" uid="uid://7wyiqo8rioqn" path="res://Resources/daynightcycle-gradient-texture.tres" id="7_jsohk"]
+[ext_resource type="Script" uid="uid://cnh7skiw8gaxo" path="res://Common/MouseCamera/MouseCamera.gd" id="7_kjmio"]
 [ext_resource type="PackedScene" uid="uid://cw6w5f8huelcd" path="res://UI/UI.tscn" id="8_jsohk"]
+[ext_resource type="Script" uid="uid://bexte2rvgtbub" path="res://Common/Day_Night/Time.gd" id="9_hx0k2"]
+[ext_resource type="PackedScene" uid="uid://s4uir2lfecl4" path="res://UI/HotBar/hot_bar_inventory.tscn" id="11_xyxra"]
 
-[sub_resource type="Resource" id="Resource_jsohk"]
-script = ExtResource("8_bbpfa")
-health = 10
-movement = 5
-initiative = 10
-metadata/_custom_type_script = "uid://bihb7vjbs5g22"
-
-[node name="ProceduralTest" type="Node2D" node_paths=PackedStringArray("tile_map", "TBmanager", "EManager", "player")]
+[node name="ProceduralTest" type="Node2D" node_paths=PackedStringArray("tile_map", "TBmanager", "EManager")]
 script = ExtResource("1_q82ol")
-tile_map = NodePath("")
-TBmanager = NodePath("")
+tile_map = NodePath("TileMapLayer")
+TBmanager = NodePath("TurnBasedManager")
 EManager = NodePath("EntityManager")
-player = NodePath("EntityManager/Player")
+I_data = ExtResource("2_ol1jl")
 
 [node name="TileMapLayer" parent="." instance=ExtResource("2_bbpfa")]
 
@@ -35,14 +33,47 @@ tile_set = ExtResource("1_vnikk")
 [node name="EntityManager" type="Node" parent="."]
 script = ExtResource("5_7slxf")
 
-[node name="Player" parent="EntityManager" node_paths=PackedStringArray("layer0", "layer1") instance=ExtResource("2_kjmio")]
-stats = SubResource("Resource_jsohk")
-layer0 = NodePath("")
-layer1 = NodePath("../../TileMapLayer2")
+[node name="Beetle" parent="EntityManager" node_paths=PackedStringArray("level_manager") instance=ExtResource("7_jmnst")]
+level_manager = NodePath("../..")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
+color = Color(0.216085, 0.216707, 0.664007, 1)
+script = ExtResource("6_bbpfa")
+gradient = ExtResource("7_jsohk")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("9_hx0k2")
 
 [node name="InventoryInterface" parent="CanvasLayer" instance=ExtResource("8_jsohk")]
 visible = false
+
+[node name="Inventory" parent="CanvasLayer/InventoryInterface" index="0"]
+visible = false
+
+[node name="Time" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Time"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="day_label" type="Label" parent="CanvasLayer/Time/VBoxContainer"]
+layout_mode = 2
+text = "Day: "
+
+[node name="time_label" type="Label" parent="CanvasLayer/Time/VBoxContainer"]
+layout_mode = 2
+text = "Time:"
+
+[node name="HotBarInventory" parent="CanvasLayer" node_paths=PackedStringArray("inventory_interface") instance=ExtResource("11_xyxra")]
+inventory_interface = NodePath("../InventoryInterface")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("7_kjmio")
 
 [editable path="CanvasLayer/InventoryInterface"]
