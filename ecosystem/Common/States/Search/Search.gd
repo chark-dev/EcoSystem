@@ -4,7 +4,7 @@ class_name Search
 @export var feed_state : Feed
 @export var idle_state : Idle
 
-@export var search_range : int
+@onready var search_range : int 
 
 var found_food : bool 
 
@@ -18,6 +18,8 @@ var search_directions = [
 	Vector2i(1, -1),  # NE
 	Vector2i(-1, 1),  # SW
 ]
+
+
 
 func process_physics(delta):
 	if found_food:
@@ -36,7 +38,14 @@ func enter():
 	found_food = false
 	search()
 
+func exit():
+	for poly in parent.tile_highlights:
+		if poly:
+			poly.queue_free()
+	parent.tile_highlights.clear()
+
 func search():
+	search_range = parent.stats.search_range
 	var current_pos = level_manager.tile_map.local_to_map(parent.global_position)
 	var target_tiles = []
 
@@ -60,8 +69,8 @@ func search():
 					
 			if not level_manager.astar_grid.is_point_solid(tile):
 				target_tiles.append(tile)
-
-	level_manager.highlight_tiles(target_tiles)
+	
+	parent.tile_highlights = level_manager.highlight_tiles(target_tiles)
 
 	if target_tiles.size() > 0:
 		var target_position = level_manager.tile_map.map_to_local(target_tiles.pick_random())

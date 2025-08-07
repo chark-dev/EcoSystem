@@ -13,9 +13,8 @@ var astar_grid : AStarGrid2D
 @export var I_data : InventoryData
 
 
+
 #@export var inventory_interface: Control 
-
-
 
 var hovered_entity
 
@@ -56,7 +55,9 @@ func draw_path():
 	pass
 
 
-func highlight_tiles(tiles):
+func highlight_tiles(tiles) -> Array[Polygon2D]:
+	var polygons: Array[Polygon2D] = []
+
 	for tile in tiles:
 		var polygon = Polygon2D.new()
 		polygon.polygon = PackedVector2Array([
@@ -69,6 +70,9 @@ func highlight_tiles(tiles):
 		polygon.visible = true
 		polygon.position = tile_map.map_to_local(tile)
 		add_child(polygon)
+		polygons.append(polygon)
+
+	return polygons
 
 
 func get_heuristic_tiles(is_predator : bool, creature) -> Dictionary:

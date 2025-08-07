@@ -12,10 +12,15 @@ var altitude = FastNoiseLite.new()
 @onready var food_scene = preload("res://Entities/Food/Food.tscn")
 @onready var smell_scene = preload("res://Entities/Smell/Smell.tscn")
 @onready var hide_scene = preload("res://Entities/HidingPlace/hide.tscn")
+@onready var pheromone_scene = preload("res://Entities/Pheromone/Pheromone.tscn")
 
 var smell_map = []
+var mammal_smell_map = []
 var food_map = []
 var hide_map = []
+
+
+var pheromone_map = []
 
 
 func init() -> void:
@@ -91,3 +96,12 @@ func add_smell(center: Vector2i):
 		smell.food_source_tile = center  # new property to track source
 		add_child(smell)
 		smell_map.append(smell)
+
+
+func drop_pheromone(tile_pos: Vector2i, source):
+	var pheromone = pheromone_scene.instantiate()
+	pheromone.position = map_to_local(tile_pos)
+	pheromone.tile_pos = tile_pos
+	pheromone.source = source  # optional: track who dropped it
+	add_child(pheromone)
+	pheromone_map.append(pheromone)

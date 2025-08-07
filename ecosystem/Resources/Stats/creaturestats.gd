@@ -7,6 +7,6 @@ class_name CreatureStats
 @export var initiative : int
 @export var courage : int
 @export var hunger : int 
-
-enum Gender { MALE, FEMALE }
-@export var gender : Gender = Gender.MALE
+@export var search_range : int
+@export var pheromone_range : int
+@export var gender : bool 

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MenuItem" load_steps=3 format=3 uid="uid://coth2agaf8v0"]
+
+[ext_resource type="Script" uid="uid://bbhchfnnwvf6q" path="res://Common/Inventory/MenuItems/menu_item.gd" id="1_uixgc"]
+[ext_resource type="Texture2D" uid="uid://ccfxx0jd786q1" path="res://Resources/Items/item_atlas.tres" id="2_k62dr"]
+
+[resource]
+script = ExtResource("1_uixgc")
+type = 3
+name = "Pause Button "
+description = "Pauses the simulation. "
+stackable = false
+texture = ExtResource("2_k62dr")
+metadata/_custom_type_script = "uid://bbhchfnnwvf6q"

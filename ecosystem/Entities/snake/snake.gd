@@ -5,7 +5,7 @@ class_name Snake
 
 @export var sleep_timer : float = 35
 @export var death_timer : float = 500
-
+@export var body : Body
 
 
 
@@ -22,7 +22,7 @@ var is_moving = false
 var current_path : Array[Vector2i]
 var current_point_path
 
-
+var tile_highlights = []
 var hide_places = []
 
 func _ready():
@@ -33,6 +33,11 @@ func _ready():
 
 
 func _physics_process(delta: float) -> void:
+	if Global.is_paused:
+		return 
+	
+	
+	
 	sleep_timer -= delta
 	death_timer -= delta
 	
@@ -49,6 +54,8 @@ func move() -> bool:
 		return true
 	
 	var target_position = level_manager.convert_path(current_path.front())
+	
+	body.target_pos = target_position
 	
 	global_position = global_position.move_toward(target_position, 1)
 	

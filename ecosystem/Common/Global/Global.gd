@@ -1,10 +1,11 @@
 extends Node
 
+var is_paused : bool = false
+
 signal turn_complete
-
-
-
 signal beetle_highlight()
+
+
 
 @onready var main_scene = preload("res://Stages/procedural_test/procedural_test.tscn")
 

@@ -5,15 +5,18 @@ enum TurnState { IDLE, MOVING, ACTING }
 var turn_state : TurnState = TurnState.IDLE
 
 @export var sleep_timer : float = 35
-@export var death_timer : float = 500
+@export var death_timer : float = 20
+var mate_timer : float = death_timer / 2
 
-
+var tile_highlights: Array[Polygon2D] = []
 
 
 @export var level_manager : LevelManager
 
 @onready var state_machine = $StateMachine
 @export var death_state : Death
+@export var mate_state : Mating
+@export var pheromone_state : PheromonePatrol
 
 @export var utility_ai : UtilityAI
 @export var stats : CreatureStats
@@ -42,15 +45,24 @@ func _ready():
 
 
 func _physics_process(delta: float) -> void:
+	if Global.is_paused:
+		return
 	sleep_timer -= delta
 	death_timer -= delta
+	mate_timer -= delta
 	
-	if death_timer <= 0:
-		state_machine.change_state(death_state)
+	#if death_timer <= 0:
+		#state_machine.change_state(death_state)
+	
 	
 	state_machine.process_physics(delta)
 
-
+func process_gender_for_mating():
+	match stats.gender:
+		true:
+			state_machine.change_state(mate_state)
+		false:
+			state_machine.change_state(pheromone_state)
 
 
 func move() -> bool:
@@ -99,6 +111,7 @@ func take_turn():
 	
 	turn_state = TurnState.MOVING
 	
+
 
 
 func execute_action():

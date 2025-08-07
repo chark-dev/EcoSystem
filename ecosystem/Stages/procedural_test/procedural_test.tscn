@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://xec41wru57i0"]
+[gd_scene load_steps=20 format=3 uid="uid://xec41wru57i0"]
 
 [ext_resource type="Script" uid="uid://l0dhwym56si4" path="res://Common/LevelManager/LevelManager.gd" id="1_q82ol"]
 [ext_resource type="TileSet" uid="uid://dexlrlyjvv6ha" path="res://Stages/tilesets/example_tileset.tres" id="1_vnikk"]
@@ -7,12 +7,42 @@
 [ext_resource type="PackedScene" uid="uid://caflfepqy0x1i" path="res://Common/TurnBasedManager/turn_based_manager.tscn" id="4_bbpfa"]
 [ext_resource type="Script" uid="uid://d35n776286ed5" path="res://Common/EntityManager/EntityManager.gd" id="5_7slxf"]
 [ext_resource type="Script" uid="uid://d4nnfg8hod4dy" path="res://Common/Day_Night/canvas_modulate.gd" id="6_bbpfa"]
-[ext_resource type="PackedScene" uid="uid://c07wpn2t0m4r8" path="res://Entities/Beetle/Beetle.tscn" id="7_jmnst"]
+[ext_resource type="PackedScene" uid="uid://c07wpn2t0m4r8" path="res://Entities/Beetle/Beetle.tscn" id="7_6fb60"]
 [ext_resource type="Texture2D" uid="uid://7wyiqo8rioqn" path="res://Resources/daynightcycle-gradient-texture.tres" id="7_jsohk"]
 [ext_resource type="Script" uid="uid://cnh7skiw8gaxo" path="res://Common/MouseCamera/MouseCamera.gd" id="7_kjmio"]
+[ext_resource type="Script" uid="uid://bihb7vjbs5g22" path="res://Resources/Stats/creaturestats.gd" id="8_bbpfa"]
 [ext_resource type="PackedScene" uid="uid://cw6w5f8huelcd" path="res://UI/UI.tscn" id="8_jsohk"]
 [ext_resource type="Script" uid="uid://bexte2rvgtbub" path="res://Common/Day_Night/Time.gd" id="9_hx0k2"]
 [ext_resource type="PackedScene" uid="uid://s4uir2lfecl4" path="res://UI/HotBar/hot_bar_inventory.tscn" id="11_xyxra"]
+[ext_resource type="Script" uid="uid://dbxf0ol4w2skb" path="res://Common/Time/time_label.gd" id="13_bmc0x"]
+[ext_resource type="PackedScene" uid="uid://nsrvxq81t54h" path="res://UI/InfoBox/info_box.tscn" id="13_mle0n"]
+[ext_resource type="Script" uid="uid://capayb37h4kbh" path="res://UI/InfoBox/info_box.gd" id="14_6fb60"]
+
+[sub_resource type="Resource" id="Resource_bmc0x"]
+script = ExtResource("8_bbpfa")
+health = 5
+max_health = 0
+movement = 5
+initiative = 5
+courage = 2
+hunger = 3
+search_range = 3
+pheromone_range = 0
+gender = true
+metadata/_custom_type_script = "uid://bihb7vjbs5g22"
+
+[sub_resource type="Resource" id="Resource_5jvul"]
+script = ExtResource("8_bbpfa")
+health = 5
+max_health = 0
+movement = 5
+initiative = 5
+courage = 2
+hunger = 3
+search_range = 3
+pheromone_range = 0
+gender = true
+metadata/_custom_type_script = "uid://bihb7vjbs5g22"
 
 [node name="ProceduralTest" type="Node2D" node_paths=PackedStringArray("tile_map", "TBmanager", "EManager")]
 script = ExtResource("1_q82ol")
@@ -33,11 +63,24 @@ tile_set = ExtResource("1_vnikk")
 [node name="EntityManager" type="Node" parent="."]
 script = ExtResource("5_7slxf")
 
-[node name="Beetle" parent="EntityManager" node_paths=PackedStringArray("level_manager") instance=ExtResource("7_jmnst")]
+[node name="Beetle" parent="EntityManager" node_paths=PackedStringArray("level_manager") instance=ExtResource("7_6fb60")]
+level_manager = NodePath("../..")
+
+[node name="Beetle2" parent="EntityManager" node_paths=PackedStringArray("level_manager") instance=ExtResource("7_6fb60")]
+level_manager = NodePath("../..")
+stats = SubResource("Resource_bmc0x")
+
+[node name="Beetle3" parent="EntityManager" node_paths=PackedStringArray("level_manager") instance=ExtResource("7_6fb60")]
+level_manager = NodePath("../..")
+
+[node name="Beetle4" parent="EntityManager" node_paths=PackedStringArray("level_manager") instance=ExtResource("7_6fb60")]
+level_manager = NodePath("../..")
+stats = SubResource("Resource_5jvul")
+
+[node name="Beetle5" parent="EntityManager" node_paths=PackedStringArray("level_manager") instance=ExtResource("7_6fb60")]
 level_manager = NodePath("../..")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
 color = Color(0.216085, 0.216707, 0.664007, 1)
 script = ExtResource("6_bbpfa")
 gradient = ExtResource("7_jsohk")
@@ -66,12 +109,18 @@ offset_bottom = 40.0
 layout_mode = 2
 text = "Day: "
 
-[node name="time_label" type="Label" parent="CanvasLayer/Time/VBoxContainer"]
+[node name="time_label" type="Label" parent="CanvasLayer/Time/VBoxContainer" node_paths=PackedStringArray("time")]
 layout_mode = 2
 text = "Time:"
+script = ExtResource("13_bmc0x")
+time = NodePath("../../../../CanvasModulate")
 
 [node name="HotBarInventory" parent="CanvasLayer" node_paths=PackedStringArray("inventory_interface") instance=ExtResource("11_xyxra")]
 inventory_interface = NodePath("../InventoryInterface")
+
+[node name="InfoBox" parent="CanvasLayer" instance=ExtResource("13_mle0n")]
+visible = false
+script = ExtResource("14_6fb60")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("7_kjmio")

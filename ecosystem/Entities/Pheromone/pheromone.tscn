@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://bdahji6uhistt"]
+
+[ext_resource type="Script" uid="uid://bedvx8mh6c350" path="res://Entities/Pheromone/pheromone.gd" id="1_f6f8g"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_64ovd"]
+load_path = "res://.godot/imported/#2 - Transparent Icons & Drop Shadow.png-4753b67252312ffda22ea37bcac95f7d.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j0cbx"]
+atlas = SubResource("CompressedTexture2D_64ovd")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f6f8g"]
+atlas = SubResource("AtlasTexture_j0cbx")
+
+[node name="Pheromone" type="Node2D"]
+script = ExtResource("1_f6f8g")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_f6f8g")

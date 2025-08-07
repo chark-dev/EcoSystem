@@ -34,13 +34,9 @@ func _init():
 func update_segments():
 	var head : Segment = segments[0]
 	
-	var local_mouse_pos = to_local(get_global_mouse_position())
-	var a : float = atan2(local_mouse_pos.y - head.position.y, local_mouse_pos.x - head.position.x)
-	
-	head.angle = a
-	
-	head.position.x += speed * cos(head.angle)
-	head.position.y += speed * sin(head.angle)
+	var dir = (target_pos - head.position).normalized()
+	head.angle = atan2(dir.y, dir.x)
+	head.position += dir * speed
 	
 	
 	var i = 1
@@ -51,6 +47,25 @@ func update_segments():
 		seg_c.update_position(seg_p)
 		
 		i += 1
+		
+		
+		
+#func update_segments():
+	#var head : Segment = segments[0]
+#
+	## Make the head follow the Snake node's position
+	#head.position = to_local(get_parent().global_position)
+#
+	## Compute direction to target
+	#var dir = (target_pos - head.position).normalized()
+	#head.angle = lerp_angle(head.angle, atan2(dir.y, dir.x), 0.2)
+#
+	## Update trailing segments
+	#for i in range(1, length):
+		#var seg_c : Segment = segments[i]
+		#var seg_p : Segment = segments[i - 1]
+		#seg_c.update_position(seg_p)
+
 
 func _physics_process(delta: float) -> void:
 	update_segments()
