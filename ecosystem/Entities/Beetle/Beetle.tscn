@@ -73,9 +73,10 @@ idle_state = NodePath("../Idle")
 script = ExtResource("9_a66yo")
 idle_state = NodePath("../Idle")
 
-[node name="PheromonePatrol" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state")]
+[node name="PheromonePatrol" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "hide_state")]
 script = ExtResource("9_demj2")
 idle_state = NodePath("../Idle")
+hide_state = NodePath("../Hide")
 
 [node name="Sleeping" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state")]
 script = ExtResource("10_a66yo")

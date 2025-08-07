@@ -12,6 +12,7 @@ var tile_highlights: Array[Polygon2D] = []
 
 
 @export var level_manager : LevelManager
+@export var entity_manager : EntityManager
 
 @onready var state_machine = $StateMachine
 @export var death_state : Death
@@ -25,6 +26,7 @@ var tile_highlights: Array[Polygon2D] = []
 
 var is_moving = false
 var is_highlighted = false
+var has_mated : bool = false
 var current_path : Array[Vector2i]
 var current_point_path
 
@@ -33,7 +35,7 @@ var hide_places = []
 
 func _ready():
 	add_to_group("actors")
-	state_machine.init(self, level_manager)
+	state_machine.init(self, level_manager, entity_manager)
 	utility_ai.init(self)
 	var current_tile = level_manager.tile_map.local_to_map(global_position)
 	global_position = level_manager.tile_map.map_to_local(current_tile)
@@ -124,3 +126,7 @@ func highlight():
 	if mat and mat is ShaderMaterial:
 		mat.set_shader_parameter("highlight_enabled", !is_highlighted)
 		is_highlighted = !is_highlighted
+
+
+func set_mating():
+	pheromone_state.mating = true 

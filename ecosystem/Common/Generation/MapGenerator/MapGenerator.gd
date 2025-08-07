@@ -6,8 +6,8 @@ var moisture = FastNoiseLite.new()
 var temperature = FastNoiseLite.new()
 var altitude = FastNoiseLite.new()
 
-@export var width = 32
-@export var height = 32
+@export var width = 64
+@export var height = 64
 
 @onready var food_scene = preload("res://Entities/Food/Food.tscn")
 @onready var smell_scene = preload("res://Entities/Smell/Smell.tscn")

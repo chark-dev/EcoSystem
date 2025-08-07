@@ -5,10 +5,11 @@ class_name StateMachine
 var current_state : State 
 var state_scores = {} 
 
-func init(parent: CharacterBody2D, level_manager : LevelManager):
+func init(parent: CharacterBody2D, level_manager : LevelManager, entity_manager : EntityManager):
 	for child in get_children():
 		child.parent = parent
 		child.level_manager = level_manager
+		child.entity_manager = entity_manager
 #		Any other data to be passed to states goes here. 
 	current_state = start_state
 	change_state(start_state)

@@ -2,7 +2,7 @@ extends State
 class_name RabbitHide
 
 @export var search_range : int
-@export var sleep_state : Sleeping
+@export var sleep_state : RabbitSleeping
 
 var found_food : bool 
 
@@ -21,6 +21,7 @@ func process_physics(delta):
 	return null
 
 func enter():
+	parent.label.text = "Hiding"
 	var tile = get_closest_hide_tile()
 	if tile:
 		target_hide_tile = tile

@@ -1,7 +1,8 @@
 extends State
 class_name Mating
 
-
+var mate : Beetle = null
+var mating : bool = false
 var search_range : int 
 @export var idle_state : Idle
 
@@ -12,12 +13,19 @@ func enter():
 	
 
 func exit():
-	pass
+	mating = false
+	parent.tile_highlights.clear()
 
 func process_physics(delta):
+	if mate:
+		if level_manager.tile_map.local_to_map(parent.global_position) == level_manager.tile_map.local_to_map(mate.global_position):
+			mate_with_partner()
+		
+	
+	
 	parent.move()
 	
-	if parent.current_path.is_empty():
+	if parent.current_path.is_empty() and !mating:
 		return idle_state
 	
 	return null
@@ -41,6 +49,10 @@ func search_for_mate():
 			for pheromone in level_manager.tile_map.pheromone_map:
 				var p_tile = pheromone.tile_pos
 				if p_tile == tile:
+					
+					mating = true
+					mate = pheromone.source
+					
 					var path = level_manager.get_actor_path(parent.global_position, pheromone.source.global_position)
 					
 					if not path.is_empty():
@@ -58,3 +70,16 @@ func search_for_mate():
 		if not path.is_empty():
 			parent.current_path = path
 		
+
+
+
+func mate_with_partner():
+	print('Mating with partner.')
+	parent.has_mated = true
+	if mate:
+		mate.set_mating()
+	
+	await get_tree().create_timer(5)
+	
+	
+	parent.state_machine.change_state(idle_state)

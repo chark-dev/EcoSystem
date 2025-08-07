@@ -4,6 +4,7 @@ var is_paused : bool = false
 
 signal turn_complete
 signal beetle_highlight()
+signal hatch_egg(position)
 
 
 

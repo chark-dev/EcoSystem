@@ -12,6 +12,10 @@ func enter():
 
 func exit():
 	food_position = Vector2i()
+	for poly in parent.tile_highlights:
+		if poly:
+			poly.queue_free()
+	parent.tile_highlights.clear()
 
 
 func process_physics(delta):
@@ -47,6 +51,10 @@ func eat_food_at_tile(tile_pos: Vector2i) -> void:
 			print("Removed Food.")
 			level_manager.tile_map.food_map.remove_at(i)
 			parent.stats.hunger -= 1
+			
+			if parent.stats.hunger <= 0:
+				parent.set_hungry()
+			
 			print("Rabbit ate food at ", tile_pos)
 
 			# 🧼 Remove smells associated with this food tile

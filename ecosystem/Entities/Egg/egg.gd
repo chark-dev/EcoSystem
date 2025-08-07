@@ -1,0 +1,31 @@
+extends Node2D
+
+@export var beetle_scene: PackedScene
+
+@export var hatch_timer : float = 1
+var hatched : bool = false
+
+var entity_manager : EntityManager
+var level_manager : LevelManager
+
+
+func _physics_process(delta: float) -> void:
+	if hatched:
+		return
+	
+	
+	
+	hatch_timer -= delta 
+	
+	
+	if hatch_timer <= 0:
+		hatched = true
+		hatch_egg()
+	
+	
+
+
+func hatch_egg():
+	Global.emit_signal("hatch_egg", global_position)
+	
+	queue_free()

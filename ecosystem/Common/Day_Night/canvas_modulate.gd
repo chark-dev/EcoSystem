@@ -18,6 +18,8 @@ func _ready() -> void:
 	time = INGAME_TO_REAL_MINUTE_DURATION * initial_hour * MINUTES_PER_HOUR
 
 func _process(delta: float):
+	if Global.is_paused:
+		return
 	time += delta * INGAME_TO_REAL_MINUTE_DURATION * INGAME_SPEED
 	var value = (sin(time - PI / 2) + 1.0 / 2.0)
 	self.color = gradient.gradient.sample(value)

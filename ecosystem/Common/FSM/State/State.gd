@@ -3,6 +3,7 @@ class_name State
 
 var parent : CharacterBody2D
 var level_manager : LevelManager
+var entity_manager : EntityManager
 
 func enter():
 	pass

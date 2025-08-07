@@ -18,3 +18,10 @@ func process_physics(delta):
 func enter():
 	parent.label.text = "Idle"
 	idle_timer = randf_range(1.0, 3.0)
+
+
+func exit():
+	for poly in parent.tile_highlights:
+		if poly:
+			poly.queue_free()
+	parent.tile_highlights.clear()

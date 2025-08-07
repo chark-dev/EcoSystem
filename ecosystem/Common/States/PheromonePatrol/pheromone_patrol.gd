@@ -2,8 +2,9 @@ extends State
 class_name PheromonePatrol
 
 @export var idle_state : Idle
+@export var hide_state : Hide
 
-
+var mating = false
 
 var current_path_tile
 var patrol_tiles := []
@@ -41,7 +42,12 @@ func enter():
 	# Set up path to first tile
 	set_next_patrol_target()
 
+func exit():
+	mating = false
+
 func process_physics(delta):
+	if mating:
+		return_and_reproduce()
 	# Wait until movement is finished
 	if parent.move():
 		# Movement complete — we're on the target tile
@@ -74,3 +80,12 @@ func set_next_patrol_target():
 
 func rest_for_mate():
 	pass
+
+
+
+func return_and_reproduce():
+	parent.has_mated = true
+	mating = false
+	hide_state.has_eggs = true
+	
+	parent.state_machine.change_state(hide_state)

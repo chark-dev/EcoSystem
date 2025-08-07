@@ -10,7 +10,7 @@ func process_physics(delta):
 	idle_timer -= delta
 	
 	
-	if parent.mate_timer <= 0:
+	if parent.mate_timer <= 0 and idle_timer <= 0 and !parent.has_mated:
 		parent.process_gender_for_mating()
 		return
 	

@@ -10,6 +10,7 @@ class_name Snake
 
 
 @export var level_manager : LevelManager
+@export var entity_manager : EntityManager
 
 @onready var state_machine = $StateMachine
 @export var death_state : Death
@@ -27,7 +28,7 @@ var hide_places = []
 
 func _ready():
 	add_to_group("actors")
-	state_machine.init(self, level_manager)
+	state_machine.init(self, level_manager, entity_manager)
 	var current_tile = level_manager.tile_map.local_to_map(global_position)
 	global_position = level_manager.tile_map.map_to_local(current_tile)
 

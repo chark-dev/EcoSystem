@@ -36,6 +36,8 @@ func enter():
 	found_food = false
 	search()
 
+
+
 func search():
 	var current_pos = level_manager.tile_map.local_to_map(parent.global_position)
 	var target_tiles = []
@@ -49,16 +51,16 @@ func search():
 			if offset.length() > search_range:
 				continue
 			
-			
-			for smell in level_manager.tile_map.smell_map:
-				var smell_tile = level_manager.tile_map.local_to_map(smell.position)
-				if smell_tile == tile:
-					feed_state.food_position = smell.food_source_tile
-					found_food = true
-					
-					
-					food_found = true 
-					break
+			if parent.is_hungry:
+				for smell in level_manager.tile_map.smell_map:
+					var smell_tile = level_manager.tile_map.local_to_map(smell.position)
+					if smell_tile == tile:
+						feed_state.food_position = smell.food_source_tile
+						found_food = true
+						
+						
+						food_found = true 
+						break
 			
 #			Check that tile is not in direction of predator
 #			Evaluate whether necessity to eat is higher than fear of predator tile. 
@@ -71,7 +73,7 @@ func search():
 			if not level_manager.astar_grid.is_point_solid(tile):
 				target_tiles.append(tile)
 
-	level_manager.highlight_tiles(target_tiles)
+	parent.tile_highlights = level_manager.highlight_tiles(target_tiles)
 	
 
 	if target_tiles.size() > 0:
