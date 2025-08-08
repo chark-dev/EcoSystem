@@ -8,9 +8,10 @@ var combat = false
 @export var tile_map : TileMapLayer
 var astar_grid : AStarGrid2D
 
-@export var TBmanager : TurnBasedManager
+
 @export var EManager : EntityManager
 @export var I_data : InventoryData
+@export var time_manager : CanvasModulate
 
 
 
@@ -21,6 +22,9 @@ var hovered_entity
 func _ready():
 	var data = Global.ecosystem_data
 	
+	time_manager.init(data['start_time'])
+	
+	
 	
 	tile_map.init()
 	astar_grid = AStarGrid2D.new()
@@ -30,6 +34,9 @@ func _ready():
 	
 	astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
 	astar_grid.update()
+	
+	
+	EManager.set_up(data)
 
 func get_actor_path(current_pos, target_pos):
 	

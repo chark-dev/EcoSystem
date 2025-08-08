@@ -1,7 +1,6 @@
 extends Control
 
 @onready var name_input = $VBoxContainer/name_input
-@onready var weather_input = $VBoxContainer/weather_input
 @onready var time_input = $VBoxContainer/time_input
 @onready var beetles_slider = $VBoxContainer/beetles_slider
 @onready var rabbits_slider = $VBoxContainer/rabbits_slider
@@ -37,7 +36,6 @@ func _update_time_label(value):
 func _on_start_pressed():
 	var data = {}
 	data['ecosystem_name'] = name_input.text
-	data['weather_type'] = weather_input.text
 	data['start_time'] = time_input.value
 	data['beetles_count'] = beetles_slider.value
 	data['rabbits_count'] = rabbits_slider.value

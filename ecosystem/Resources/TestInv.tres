@@ -1,43 +1,77 @@
-[gd_resource type="Resource" script_class="InventoryData" load_steps=12 format=3 uid="uid://c51pxd5o54bxu"]
+[gd_resource type="Resource" script_class="InventoryData" load_steps=16 format=3 uid="uid://c51pxd5o54bxu"]
 
 [ext_resource type="Script" uid="uid://b62ha0q2t47vt" path="res://Common/Inventory/InventoryData/InventoryData.gd" id="1_72n1t"]
 [ext_resource type="Script" uid="uid://bmme3bo1copuv" path="res://Common/Inventory/SlotData/SlotData.gd" id="2_plibu"]
-[ext_resource type="Resource" uid="uid://bilp8om4mk0or" path="res://Common/Inventory/MenuItems/beetle_button.tres" id="3_86j85"]
-[ext_resource type="Resource" uid="uid://cmhbo5uklu2dl" path="res://Resources/Items/Apple.tres" id="3_r8n0s"]
-[ext_resource type="Resource" uid="uid://bwb2kfe202fw6" path="res://Resources/Items/BlueBlook.tres" id="4_86j85"]
 [ext_resource type="Resource" uid="uid://coth2agaf8v0" path="res://Common/Inventory/MenuItems/pause_button.tres" id="4_fyef2"]
+[ext_resource type="Script" uid="uid://bbhchfnnwvf6q" path="res://Common/Inventory/MenuItems/menu_item.gd" id="4_plibu"]
 
 [sub_resource type="Resource" id="Resource_810ut"]
-script = ExtResource("2_plibu")
-item_data = ExtResource("3_86j85")
-quantity = 1
-metadata/_custom_type_script = "uid://bmme3bo1copuv"
-
-[sub_resource type="Resource" id="Resource_y4ono"]
 script = ExtResource("2_plibu")
 item_data = ExtResource("4_fyef2")
 quantity = 1
 metadata/_custom_type_script = "uid://bmme3bo1copuv"
 
-[sub_resource type="Resource" id="Resource_fyef2"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_64ovd"]
+load_path = "res://.godot/imported/#2 - Transparent Icons & Drop Shadow.png-4753b67252312ffda22ea37bcac95f7d.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_plibu"]
+atlas = SubResource("CompressedTexture2D_64ovd")
+region = Rect2(320, 512, 32, 32)
+
+[sub_resource type="Resource" id="Resource_r8n0s"]
+script = ExtResource("4_plibu")
+type = 0
+name = "Shows Beetle Info"
+description = ""
+stackable = false
+texture = SubResource("AtlasTexture_plibu")
+metadata/_custom_type_script = "uid://bbhchfnnwvf6q"
+
+[sub_resource type="Resource" id="Resource_86j85"]
 script = ExtResource("2_plibu")
-item_data = ExtResource("3_r8n0s")
-quantity = 10
+item_data = SubResource("Resource_r8n0s")
+quantity = 1
 metadata/_custom_type_script = "uid://bmme3bo1copuv"
 
-[sub_resource type="Resource" id="Resource_plibu"]
-script = ExtResource("2_plibu")
-item_data = ExtResource("3_r8n0s")
-quantity = 10
-metadata/_custom_type_script = "uid://bmme3bo1copuv"
+[sub_resource type="AtlasTexture" id="AtlasTexture_r8n0s"]
+atlas = SubResource("CompressedTexture2D_64ovd")
+region = Rect2(416, 352, 32, 32)
+
+[sub_resource type="Resource" id="Resource_fyef2"]
+script = ExtResource("4_plibu")
+type = 1
+name = "Herbivore Button"
+description = "Shows Herbivore Information "
+stackable = false
+texture = SubResource("AtlasTexture_r8n0s")
+metadata/_custom_type_script = "uid://bbhchfnnwvf6q"
 
 [sub_resource type="Resource" id="Resource_cqti0"]
 script = ExtResource("2_plibu")
-item_data = ExtResource("4_86j85")
+item_data = SubResource("Resource_fyef2")
+quantity = 1
+metadata/_custom_type_script = "uid://bmme3bo1copuv"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_86j85"]
+atlas = SubResource("CompressedTexture2D_64ovd")
+region = Rect2(160, 512, 32, 32)
+
+[sub_resource type="Resource" id="Resource_y4ono"]
+script = ExtResource("4_plibu")
+type = 2
+name = "Snake Button "
+description = "Shows Snake Info "
+stackable = false
+texture = SubResource("AtlasTexture_86j85")
+metadata/_custom_type_script = "uid://bbhchfnnwvf6q"
+
+[sub_resource type="Resource" id="Resource_jyhwh"]
+script = ExtResource("2_plibu")
+item_data = SubResource("Resource_y4ono")
 quantity = 1
 metadata/_custom_type_script = "uid://bmme3bo1copuv"
 
 [resource]
 script = ExtResource("1_72n1t")
-slot_datas = Array[ExtResource("2_plibu")]([SubResource("Resource_810ut"), SubResource("Resource_y4ono"), SubResource("Resource_fyef2"), SubResource("Resource_plibu"), null, SubResource("Resource_cqti0"), null, null, null, null, null, null, null, null, null, null, null, null])
+slot_datas = Array[ExtResource("2_plibu")]([SubResource("Resource_810ut"), SubResource("Resource_86j85"), SubResource("Resource_cqti0"), SubResource("Resource_jyhwh"), null, null, null, null, null, null, null, null, null, null, null, null, null, null])
 metadata/_custom_type_script = "uid://b62ha0q2t47vt"

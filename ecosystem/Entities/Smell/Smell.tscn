@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://crq7ktbhqnih6" path="res://Entities/Smell/smell.gd" id="2_u1sjt"]
 
 [node name="Smell" type="Sprite2D"]
+visible = false
 modulate = Color(1, 0, 0.611765, 1)
 texture = ExtResource("1_bfmwm")
 script = ExtResource("2_u1sjt")

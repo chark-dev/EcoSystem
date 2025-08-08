@@ -3,7 +3,9 @@ extends Node
 var is_paused : bool = false
 
 signal turn_complete
-signal beetle_highlight()
+signal beetle_highlight(num)
+signal herbi_highlight(num)
+signal snake_highlight(num)
 signal hatch_egg(position)
 
 
@@ -14,8 +16,6 @@ signal hatch_egg(position)
 var ecosystem_data : Dictionary
 
 func set_up_ecosystem(data : Dictionary):
-	
-	
 #	check if any dict values are empty, then set defaults. 
 	
 	print('This is the autoload:', data)

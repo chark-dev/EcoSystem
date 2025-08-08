@@ -37,7 +37,7 @@ func hide():
 
 func get_closest_hide_tile():
 	if parent.hide_places.is_empty():
-		return null
+		return level_manager.tile_map.local_to_map(parent.global_position)
 	
 	var current_tile := level_manager.tile_map.local_to_map(parent.global_position)
 	var closest_tile : Vector2i = parent.hide_places[0]

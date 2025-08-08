@@ -36,6 +36,12 @@ func enter():
 	found_food = false
 	search()
 
+func exit():
+	for poly in parent.tile_highlights:
+		if poly:
+			poly.queue_free()
+	parent.tile_highlights.clear()
+
 
 
 func search():
@@ -50,7 +56,10 @@ func search():
 			# Optional: skip out-of-range tiles if using circular search
 			if offset.length() > search_range:
 				continue
-			
+			for hide in level_manager.tile_map.hide_map:
+				if hide.hide_source_tile == tile:
+					print("Found hide tile at :", tile)
+					parent.hide_places.append(tile)
 			if parent.is_hungry:
 				for smell in level_manager.tile_map.smell_map:
 					var smell_tile = level_manager.tile_map.local_to_map(smell.position)

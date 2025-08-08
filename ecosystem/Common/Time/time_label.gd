@@ -7,4 +7,4 @@ func _ready():
 
 
 func on_time_tick(day: int, hour: int, minute: int):
-	text = "Time:\n" + str(hour) + "\n" + str(minute)
+	text = "Time:" + str(hour) + ":" + str(minute)

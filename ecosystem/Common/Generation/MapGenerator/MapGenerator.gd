@@ -22,6 +22,8 @@ var hide_map = []
 
 var pheromone_map = []
 
+var land_tiles = {}
+
 
 func init() -> void:
 	moisture.seed = randi()
@@ -32,8 +34,8 @@ func init() -> void:
 
 
 
-func _process(delta: float) -> void:
-	queue_redraw()
+#func _process(delta: float) -> void:
+	#queue_redraw()
 
 
 func generate_chunk(target_origin):
@@ -105,3 +107,11 @@ func drop_pheromone(tile_pos: Vector2i, source):
 	pheromone.source = source  # optional: track who dropped it
 	add_child(pheromone)
 	pheromone_map.append(pheromone)
+
+
+
+func get_random_tile() -> Vector2:
+	var tile_pos = local_to_map(target_origin)
+	var rand_x = tile_pos.x - width / 2 + randi() % width
+	var rand_y = tile_pos.y - height / 2 + randi() % height
+	return map_to_local(Vector2i(rand_x, rand_y))

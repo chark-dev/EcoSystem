@@ -13,6 +13,8 @@ var center_tile := Vector2i.ZERO
 var center_position := Vector2.ZERO
 var returning_home := false
 
+var mate_timer : float = 20
+
 var search_range : int 
 
 func enter():
@@ -44,8 +46,16 @@ func enter():
 
 func exit():
 	mating = false
+	mate_timer = 20
 
 func process_physics(delta):
+	
+	mate_timer -= delta
+	
+	if mate_timer <= 0:
+		parent.mate_timer = 30
+		return idle_state
+	
 	if mating:
 		return_and_reproduce()
 	# Wait until movement is finished

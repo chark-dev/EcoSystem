@@ -20,12 +20,7 @@ offset_bottom = 192.0
 
 [node name="Label" type="Label" parent="ColorRect/VBoxContainer"]
 layout_mode = 2
-text = "Num of Beetles: "
 
 [node name="Label2" type="Label" parent="ColorRect/VBoxContainer"]
 layout_mode = 2
 text = "Mating Potential:"
-
-[node name="Label3" type="Label" parent="ColorRect/VBoxContainer"]
-layout_mode = 2
-text = "Threat Level: "

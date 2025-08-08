@@ -3,6 +3,7 @@ class_name Rabbit
 
 @export var sleep_timer : float = 35
 @export var death_timer : float = 500
+var mate_timer : float = death_timer / 2
 
 
 var home_tile : Vector2i
@@ -13,6 +14,7 @@ var home_tile : Vector2i
 
 @onready var state_machine = $StateMachine
 @export var death_state : Death
+@export var mate_state : RabbitMating
 
 @export var stats : CreatureStats
 
@@ -20,6 +22,8 @@ var home_tile : Vector2i
 
 var is_moving = false
 var is_hungry = true
+var is_mating = false
+var is_highlighted = false
 var current_path : Array[Vector2i]
 var current_point_path
 
@@ -30,13 +34,25 @@ var hide_places = []
 var food_growths = []
 
 func _ready():
+	sleep_timer = randf_range(35.0, 50.0)
 	add_to_group("actors")
+	entity_manager.add_to_mammals(self)
 	state_machine.init(self, level_manager, entity_manager)
 	var current_tile = level_manager.tile_map.local_to_map(global_position)
 	global_position = level_manager.tile_map.map_to_local(current_tile)
+	
+	Global.connect("herbi_highlight", highlight)
+	
+	var mat = $Sprite2D.material
+	if mat and mat is ShaderMaterial:
+		mat.set_shader_parameter("highlight_enabled", false)
 
 
 func _physics_process(delta: float) -> void:
+	if Global.is_paused:
+		return
+	
+	
 	sleep_timer -= delta
 	death_timer -= delta
 	
@@ -45,7 +61,12 @@ func _physics_process(delta: float) -> void:
 	
 	state_machine.process_physics(delta)
 
-
+func process_gender_for_mating():
+	match stats.gender:
+		true:
+			state_machine.change_state(mate_state)
+		false:
+			is_mating = true 
 
 
 func move() -> bool:
@@ -57,10 +78,15 @@ func move() -> bool:
 	global_position = global_position.move_toward(target_position, 1.5)
 	
 	if global_position == target_position:
-		current_path.pop_front()
+		var current_path_tile = current_path.pop_front()
+		
+		if is_mating:
+			level_manager.tile_map.drop_pheromone(current_path_tile, self)
 	
 	return current_path.is_empty()
 
+func drop_pheromone():
+	pass
 
 
 func set_hungry():
@@ -69,3 +95,10 @@ func set_hungry():
 func execute_action():
 	print("Attacking")
 	pass
+
+
+func highlight(i : int):
+	var mat = $Sprite2D.material
+	if mat and mat is ShaderMaterial:
+		mat.set_shader_parameter("highlight_enabled", !is_highlighted)
+		is_highlighted = !is_highlighted

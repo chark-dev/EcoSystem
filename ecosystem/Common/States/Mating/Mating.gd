@@ -12,8 +12,13 @@ func enter():
 	search_for_mate()
 	
 
+
+
 func exit():
 	mating = false
+	for poly in parent.tile_highlights:
+		if poly:
+			poly.queue_free()
 	parent.tile_highlights.clear()
 
 func process_physics(delta):
@@ -47,17 +52,18 @@ func search_for_mate():
 				continue
 			
 			for pheromone in level_manager.tile_map.pheromone_map:
-				var p_tile = pheromone.tile_pos
-				if p_tile == tile:
-					
-					mating = true
-					mate = pheromone.source
-					
-					var path = level_manager.get_actor_path(parent.global_position, pheromone.source.global_position)
-					
-					if not path.is_empty():
-						parent.current_path = path
-						return
+				if pheromone.source is Beetle:
+					var p_tile = pheromone.tile_pos
+					if p_tile == tile:
+						
+						mating = true
+						mate = pheromone.source
+						
+						var path = level_manager.get_actor_path(parent.global_position, pheromone.source.global_position)
+						
+						if not path.is_empty():
+							parent.current_path = path
+							return
 	
 			if not level_manager.astar_grid.is_point_solid(tile):
 				target_tiles.append(tile)
@@ -79,7 +85,7 @@ func mate_with_partner():
 	if mate:
 		mate.set_mating()
 	
-	await get_tree().create_timer(5)
+	await get_tree().create_timer(5).timeout
 	
 	
 	parent.state_machine.change_state(idle_state)

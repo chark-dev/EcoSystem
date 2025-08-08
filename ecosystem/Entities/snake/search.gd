@@ -9,6 +9,9 @@ class_name SnakeSearch
 
 var found_food : bool 
 
+
+var closest_distance = INF
+
 var search_directions = [
 	Vector2i(1, 0),   # East
 	Vector2i(-1, 0),  # West
@@ -21,7 +24,8 @@ var search_directions = [
 ]
 
 func process_physics(delta):
-	if found_food:
+	
+	if parent.closest_mammal:
 		return feed_state
 	
 	if parent.current_path.is_empty():
@@ -54,12 +58,20 @@ func search():
 			# Optional: skip out-of-range tiles if using circular search
 			if offset.length() > search_range:
 				continue
-			for smell in level_manager.tile_map.mammal_smell_map:
-				var smell_tile = level_manager.tile_map.local_to_map(smell.position)
-				if smell_tile == tile:
-					feed_state.food_position = smell.food_source_tile
-					found_food = true
-					break
+			for hide in level_manager.tile_map.hide_map:
+				if hide.hide_source_tile == tile:
+					print("Found hide tile at :", tile)
+					parent.hide_places.append(tile)
+			if parent.is_hungry:
+				for mammal in parent.entity_manager.mammals:
+								var mammal_tile = level_manager.tile_map.local_to_map(mammal.global_position)
+								if mammal_tile == tile:
+									var dist = offset.length()
+									if dist < closest_distance:
+										closest_distance = dist
+										
+										parent.closest_mammal = mammal
+										print(parent.closest_mammal)
 			
 #			 Here add for loop to check if mammal is in Search radius 
 					

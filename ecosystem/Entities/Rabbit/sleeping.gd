@@ -14,7 +14,6 @@ func process_physics(delta):
 	
 	awake_timer -= delta
 	
-	print(awake_timer)
 	
 	if awake_timer <= 0:
 		parent.show()

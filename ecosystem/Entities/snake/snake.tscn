@@ -1,23 +1,48 @@
-[gd_scene load_steps=13 format=3 uid="uid://cp760ibj4jfmp"]
+[gd_scene load_steps=17 format=3 uid="uid://cp760ibj4jfmp"]
 
 [ext_resource type="Script" uid="uid://wmeho15wci6c" path="res://Entities/snake/snake.gd" id="1_8bwt7"]
+[ext_resource type="Script" uid="uid://bihb7vjbs5g22" path="res://Resources/Stats/creaturestats.gd" id="2_kqs2o"]
 [ext_resource type="Script" uid="uid://t1u03opvyfvy" path="res://Common/FSM/StateMachine/StateMachine.gd" id="2_r5uhb"]
 [ext_resource type="Script" uid="uid://b54ej1m73v4cc" path="res://Entities/snake/idle.gd" id="3_2ofnb"]
-[ext_resource type="Texture2D" uid="uid://bcoo3atah0ic3" path="res://beete.png" id="3_r174m"]
 [ext_resource type="Script" uid="uid://b52tprr46n87j" path="res://Entities/snake/search.gd" id="4_2ofnb"]
 [ext_resource type="Script" uid="uid://cq7q646j8tty" path="res://Entities/snake/snakehide.gd" id="5_j6b13"]
 [ext_resource type="Script" uid="uid://b5f40mcb426hm" path="res://Entities/snake/hunt.gd" id="5_qq8ia"]
 [ext_resource type="Script" uid="uid://s1cxixgvxlcq" path="res://Entities/Beetle/death.gd" id="6_qdids"]
 [ext_resource type="Script" uid="uid://3xfsru7jowgc" path="res://Entities/snake/snake_mating.gd" id="7_asgo4"]
 [ext_resource type="Script" uid="uid://d3k18ua8b4noi" path="res://Entities/snake/snake_sleeping.gd" id="8_s1uyp"]
+[ext_resource type="Shader" uid="uid://c4fjp7xtvfffk" path="res://Common/Shaders/Glow.gdshader" id="10_vcwob"]
 [ext_resource type="Script" uid="uid://0ualjm1qovg0" path="res://Common/Physics/Body/Body.gd" id="11_arqwi"]
+[ext_resource type="Texture2D" uid="uid://dclby5ninn5xp" path="res://Screenshot 2025-08-08 at 16.19.53.png" id="12_kqs2o"]
+
+[sub_resource type="Resource" id="Resource_qk4py"]
+script = ExtResource("2_kqs2o")
+health = 0
+max_health = 0
+movement = 0
+initiative = 0
+courage = 0
+hunger = 0
+search_range = 0
+pheromone_range = 0
+gender = true
+metadata/_custom_type_script = "uid://bihb7vjbs5g22"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kqs2o"]
+shader = ExtResource("10_vcwob")
+shader_parameter/highlight_enabled = true
+shader_parameter/pulse_speed = 4.0
+shader_parameter/pulse_strength = 1.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r5uhb"]
+radius = 26.0
+height = 52.0
 
 [node name="Snake" type="CharacterBody2D" node_paths=PackedStringArray("body", "death_state")]
+collision_mask = 2
 script = ExtResource("1_8bwt7")
 body = NodePath("Body")
 death_state = NodePath("StateMachine/Death")
+stats = SubResource("Resource_qk4py")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("start_state")]
 script = ExtResource("2_r5uhb")
@@ -39,8 +64,9 @@ search_range = 6
 script = ExtResource("5_j6b13")
 sleep_state = NodePath("../Sleeping")
 
-[node name="Hunt" type="Node" parent="StateMachine"]
+[node name="Hunt" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state")]
 script = ExtResource("5_qq8ia")
+idle_state = NodePath("../Idle")
 
 [node name="Mating" type="Node" parent="StateMachine"]
 script = ExtResource("7_asgo4")
@@ -53,11 +79,9 @@ idle_state = NodePath("../Idle")
 script = ExtResource("6_qdids")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(3, 3)
-texture = ExtResource("3_r174m")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_r5uhb")
+material = SubResource("ShaderMaterial_kqs2o")
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("12_kqs2o")
 
 [node name="Label" type="Label" parent="."]
 offset_left = -20.0
@@ -69,3 +93,10 @@ offset_bottom = -14.0
 visible = false
 script = ExtResource("11_arqwi")
 metadata/_custom_type_script = "uid://0ualjm1qovg0"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_r5uhb")

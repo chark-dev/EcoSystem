@@ -5,7 +5,7 @@ enum TurnState { IDLE, MOVING, ACTING }
 var turn_state : TurnState = TurnState.IDLE
 
 @export var sleep_timer : float = 35
-@export var death_timer : float = 20
+@export var death_timer : float = 30
 var mate_timer : float = death_timer / 2
 
 var tile_highlights: Array[Polygon2D] = []
@@ -20,11 +20,12 @@ var tile_highlights: Array[Polygon2D] = []
 @export var pheromone_state : PheromonePatrol
 
 @export var utility_ai : UtilityAI
-@export var stats : CreatureStats
+var stats : CreatureStats
 
 @onready var label = $Label
 
 var is_moving = false
+var is_hungry = true
 var is_highlighted = false
 var has_mated : bool = false
 var current_path : Array[Vector2i]
@@ -34,6 +35,9 @@ var current_point_path
 var hide_places = []
 
 func _ready():
+	sleep_timer = randf_range(35.0, 50.0)
+	set_up_stats()
+
 	add_to_group("actors")
 	state_machine.init(self, level_manager, entity_manager)
 	utility_ai.init(self)
@@ -45,6 +49,16 @@ func _ready():
 	if mat and mat is ShaderMaterial:
 		mat.set_shader_parameter("highlight_enabled", false)
 
+func set_up_stats():
+	stats = CreatureStats.new()
+	stats.gender = randf() < 0.5
+	stats.courage = 3
+	stats.health = 3
+	stats.max_health = 3
+	stats.movement = 5
+	stats.search_range = 3
+	stats.hunger = 1
+	stats.pheromone_range = 2
 
 func _physics_process(delta: float) -> void:
 	if Global.is_paused:
@@ -121,7 +135,7 @@ func execute_action():
 	pass
 
 
-func highlight():
+func highlight(i : int):
 	var mat = $Sprite2D.material
 	if mat and mat is ShaderMaterial:
 		mat.set_shader_parameter("highlight_enabled", !is_highlighted)

@@ -14,8 +14,9 @@ signal time_tick(day: int, hour: int, minute: int)
 var time: float = 0.0
 var past_minute: float = -1.0
 
-func _ready() -> void:
-	time = INGAME_TO_REAL_MINUTE_DURATION * initial_hour * MINUTES_PER_HOUR
+func init(t) -> void:
+	time = INGAME_TO_REAL_MINUTE_DURATION * t * MINUTES_PER_HOUR
+
 
 func _process(delta: float):
 	if Global.is_paused:

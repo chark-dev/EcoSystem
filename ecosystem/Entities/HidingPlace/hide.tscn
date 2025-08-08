@@ -4,5 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://va5pipkwnwsc" path="res://joint.png" id="1_i4ial"]
 
 [node name="Hide" type="Sprite2D"]
+modulate = Color(0.735295, 0.479578, 3.85046e-07, 1)
 texture = ExtResource("1_i4ial")
 script = ExtResource("1_5pgfk")

@@ -37,4 +37,19 @@ func hide():
 		parent.current_path = path
 
 func get_closest_hide_tile():
-	return parent.home_tile
+	if parent.hide_places.is_empty():
+		return level_manager.tile_map.local_to_map(parent.global_position)
+	
+	var current_tile := level_manager.tile_map.local_to_map(parent.global_position)
+	var closest_tile : Vector2i = parent.hide_places[-1]
+	
+	var shortest_distance := current_tile.distance_to(closest_tile)
+	
+	
+	for tile in parent.hide_places:
+		var distance := current_tile.distance_to(tile)
+		if distance < shortest_distance:
+			shortest_distance = distance
+			closest_tile = tile
+	
+	return closest_tile

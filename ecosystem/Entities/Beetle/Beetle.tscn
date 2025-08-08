@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c07wpn2t0m4r8"]
+[gd_scene load_steps=16 format=3 uid="uid://c07wpn2t0m4r8"]
 
 [ext_resource type="Script" uid="uid://gle08c5vhkv" path="res://Entities/Beetle/Beetle.gd" id="1_1xcpe"]
 [ext_resource type="Script" uid="uid://t1u03opvyfvy" path="res://Common/FSM/StateMachine/StateMachine.gd" id="2_wbhil"]
@@ -7,26 +7,12 @@
 [ext_resource type="Script" uid="uid://d3dcthbo4nfym" path="res://Common/States/Search/Search.gd" id="4_xosba"]
 [ext_resource type="Script" uid="uid://326cre4fg4bd" path="res://Common/States/Hide/Hide.gd" id="5_qh35w"]
 [ext_resource type="Script" uid="uid://6o1mvc3tgc7p" path="res://Common/States/Feed/Feed.gd" id="6_rf0ry"]
-[ext_resource type="Script" uid="uid://bihb7vjbs5g22" path="res://Resources/Stats/creaturestats.gd" id="8_qh35w"]
 [ext_resource type="Script" uid="uid://b5ss3rg1vx806" path="res://Common/States/Mating/Mating.gd" id="9_a66yo"]
 [ext_resource type="Script" uid="uid://bfho0spn1d67g" path="res://Common/States/PheromonePatrol/pheromone_patrol.gd" id="9_demj2"]
 [ext_resource type="Script" uid="uid://cxdypo8620jaa" path="res://Entities/UtilityAI/UtilityAI.gd" id="9_rf0ry"]
 [ext_resource type="Script" uid="uid://c1nts1ybf5tbu" path="res://Common/States/Sleeping/sleeping.gd" id="10_a66yo"]
 [ext_resource type="Shader" uid="uid://c4fjp7xtvfffk" path="res://Common/Shaders/Glow.gdshader" id="11_demj2"]
 [ext_resource type="Script" uid="uid://s1cxixgvxlcq" path="res://Entities/Beetle/death.gd" id="11_uj1el"]
-
-[sub_resource type="Resource" id="Resource_qh35w"]
-script = ExtResource("8_qh35w")
-health = 5
-max_health = 0
-movement = 5
-initiative = 5
-courage = 2
-hunger = 3
-search_range = 3
-pheromone_range = 1
-gender = false
-metadata/_custom_type_script = "uid://bihb7vjbs5g22"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uj1el"]
 shader = ExtResource("11_demj2")
@@ -43,7 +29,6 @@ death_state = NodePath("StateMachine/Death")
 mate_state = NodePath("StateMachine/Mating")
 pheromone_state = NodePath("StateMachine/PheromonePatrol")
 utility_ai = NodePath("UtilityAI")
-stats = SubResource("Resource_qh35w")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("start_state")]
 script = ExtResource("2_wbhil")
