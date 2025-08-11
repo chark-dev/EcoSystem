@@ -11,11 +11,13 @@ var patrol_tiles := []
 var current_target_pos := Vector2.ZERO
 var center_tile := Vector2i.ZERO
 var center_position := Vector2.ZERO
-var returning_home := false
+var returned_home := false
 
 var mate_timer : float = 20
 
 var search_range : int 
+
+var last_pheromone_tile : Vector2i = Vector2i(-9999, -9999)
 
 func enter():
 	search_range = parent.stats.pheromone_range
@@ -49,6 +51,7 @@ func exit():
 	mate_timer = 20
 
 func process_physics(delta):
+	var beetle_tile = level_manager.tile_map.local_to_map(parent.global_position)
 	
 	mate_timer -= delta
 	
@@ -59,16 +62,9 @@ func process_physics(delta):
 	if mating:
 		return_and_reproduce()
 	# Wait until movement is finished
-	if parent.move():
+	if parent.move() and not returned_home:
 		# Movement complete — we're on the target tile
-
 		# If returning to center, rest and finish
-		if returning_home:
-			rest_for_mate()
-
-		# Drop pheromone at the tile we just arrived at
-		level_manager.tile_map.drop_pheromone(current_path_tile, parent)
-
 		# Continue patrol
 		if patrol_tiles.size() > 0:
 			set_next_patrol_target()
@@ -76,7 +72,10 @@ func process_physics(delta):
 			# No more patrol tiles — return to center
 			var path = level_manager.get_actor_path(parent.global_position, center_position)
 			parent.current_path = path
-			returning_home = true
+			if parent.global_position == center_position:
+				rest_for_mate()
+				returned_home = true
+			
 
 	return null  # No state change unless resting
 
@@ -89,6 +88,10 @@ func set_next_patrol_target():
 
 
 func rest_for_mate():
+	level_manager.tile_map.drop_pheromone(current_path_tile, parent)
+	await get_tree().create_timer(15).timeout
+	
+	
 	pass
 
 

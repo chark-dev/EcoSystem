@@ -107,6 +107,8 @@ func drop_pheromone(tile_pos: Vector2i, source):
 	pheromone.source = source  # optional: track who dropped it
 	add_child(pheromone)
 	pheromone_map.append(pheromone)
+	
+	print("The pheromone map size is: ", pheromone_map.size())
 
 
 
