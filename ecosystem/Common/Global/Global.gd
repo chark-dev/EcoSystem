@@ -8,6 +8,10 @@ signal herbi_highlight(num)
 signal snake_highlight(num)
 signal hatch_egg(position)
 
+var current_seed 
+
+func _ready():
+	pass
 
 
 @onready var main_scene = preload("res://Stages/procedural_test/procedural_test.tscn")
@@ -21,6 +25,21 @@ func set_up_ecosystem(data : Dictionary):
 	print('This is the autoload:', data)
 	
 	ecosystem_data = data
+	
+	
+	if data['seed'] and str(data['seed']).is_valid_int():
+		current_seed = data['seed']
+		current_seed = int(current_seed)
+		seed(current_seed)
+		
+		
+		print(randi())
+	else:
+		randomize()
+		current_seed = randi()
+		seed(current_seed)
+	
+	
 	
 	
 	load_main_scene()

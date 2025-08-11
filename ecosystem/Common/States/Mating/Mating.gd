@@ -85,7 +85,7 @@ func mate_with_partner():
 	if mate:
 		mate.set_mating()
 	
-	await get_tree().create_timer(5).timeout
+	await get_tree().create_timer(1).timeout
 	
 	
 	parent.state_machine.change_state(idle_state)

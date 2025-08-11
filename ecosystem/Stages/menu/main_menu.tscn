@@ -23,6 +23,13 @@ text = "Ecosystem Name"
 [node name="name_input" type="LineEdit" parent="VBoxContainer"]
 layout_mode = 2
 
+[node name="Seed" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Seed:"
+
+[node name="seed_input" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+
 [node name="Starting Time" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "Starting Time"
@@ -37,7 +44,6 @@ text = "Num of Beetles :"
 
 [node name="beetles_slider" type="HSlider" parent="VBoxContainer"]
 layout_mode = 2
-max_value = 15.0
 
 [node name="Rabbits Count" type="Label" parent="VBoxContainer"]
 layout_mode = 2

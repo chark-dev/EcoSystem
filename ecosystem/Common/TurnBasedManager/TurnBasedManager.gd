@@ -9,7 +9,7 @@ func _ready():
 	Global.turn_complete.connect(on_turn_complete)
 
 func init_combat():
-	randomize()
+	
 	queue.clear()
 
 	for creature in level_manager.get_creatures():
