@@ -1,6 +1,6 @@
 extends Control  # or whatever your root node is
 
-@onready var data_label = $VBoxContainer/Label
+@onready var data_label = $VBoxContainer/ScrollContainer/Label
 @onready var save_button = $VBoxContainer/save
 @onready var main_menu_button = $VBoxContainer/exit
 @onready var file_dialog = $FileDialog
@@ -45,5 +45,5 @@ func _on_exit_pressed() -> void:
 func _on_file_dialog_file_selected(path: String) -> void:
 	var file = FileAccess.open(path, FileAccess.WRITE)
 	
-	var json_text = JSON.stringify(Global.ecosystem_data)
+	var json_text = JSON.stringify(data_label.text)
 	file.store_string(json_text)

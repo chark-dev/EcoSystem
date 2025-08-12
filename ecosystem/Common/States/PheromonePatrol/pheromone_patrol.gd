@@ -89,6 +89,7 @@ func set_next_patrol_target():
 
 func rest_for_mate():
 	level_manager.tile_map.drop_pheromone(current_path_tile, parent)
+	Global.output_data['beetle_pheromones_dropped'] += 1
 	await get_tree().create_timer(15).timeout
 	
 	

@@ -42,6 +42,7 @@ func _ready():
 	global_position = level_manager.tile_map.map_to_local(current_tile)
 	
 	Global.connect("herbi_highlight", highlight)
+	Global.connect("remove_label", hide_label)
 	
 	var mat = $Sprite2D.material
 	if mat and mat is ShaderMaterial:
@@ -96,6 +97,8 @@ func execute_action():
 	print("Attacking")
 	pass
 
+func hide_label():
+	label.visible = not label.visible
 
 func highlight(i : int):
 	var mat = $Sprite2D.material

@@ -65,6 +65,7 @@ func generate_chunk(target_origin):
 
 func spawn_hide_place(tile_pos: Vector2i):
 	if randf() < 0.05:
+		Global.output_data['hide_places'] += 1
 		var hide_spot = hide_scene.instantiate()
 		hide_spot.position = map_to_local(tile_pos)
 		hide_spot.hide_source_tile = tile_pos
@@ -73,6 +74,7 @@ func spawn_hide_place(tile_pos: Vector2i):
 
 func spawn_food(tile_pos: Vector2i):
 	if randf() < 0.05:
+		Global.output_data['food_dropped'] += 1
 		var food = food_scene.instantiate()
 		food.position = map_to_local(tile_pos)
 		add_child(food)
@@ -87,6 +89,7 @@ func spawn_food(tile_pos: Vector2i):
 		
 
 func spawn_food_hour(hour: int):
+	Global.output_data['food_dropped'] += 1
 	var food = food_scene.instantiate()
 	food.position = map_to_local(get_random_tile())
 	add_child(food)

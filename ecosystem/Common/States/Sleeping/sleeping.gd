@@ -41,13 +41,14 @@ func lay_eggs():
 	
 	var egg_count = randi_range(1, 3)
 	
-	Global.output_data['beetle_eggs'] += egg_count
 	
 	for i in egg_count:
 		var new_egg = egg.instantiate()
 		
 		new_egg.level_manager = level_manager
 		new_egg.entity_manager = entity_manager
+		
+		new_egg.type = 'beetle'
 		
 		new_egg.global_position = parent.global_position
 		entity_manager.add_child(new_egg)

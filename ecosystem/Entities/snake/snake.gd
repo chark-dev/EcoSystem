@@ -5,7 +5,7 @@ class_name Snake
 
 @export var sleep_timer : float = 35
 @export var death_timer : float = 500
-@export var mate_timer : float = death_timer / 5
+@export var mate_timer : float = death_timer / 6
 @export var speed : float = 1
 
 @onready var collision_area : Area2D = $Area2D
@@ -45,6 +45,7 @@ func _ready():
 	
 	
 	Global.connect("snake_highlight", highlight)
+	Global.connect("remove_label", hide_label)
 	
 	var mat = $Sprite2D.material
 	if mat and mat is ShaderMaterial:
@@ -113,6 +114,9 @@ func highlight(i : int):
 	if mat and mat is ShaderMaterial:
 		mat.set_shader_parameter("highlight_enabled", !is_highlighted)
 		is_highlighted = !is_highlighted
+
+func hide_label():
+	label.visible = not label.visible
 
 func set_mating():
 	pheromone_state.mating = true 

@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="InventoryData" load_steps=16 format=3 uid="uid://c51pxd5o54bxu"]
+[gd_resource type="Resource" script_class="InventoryData" load_steps=18 format=3 uid="uid://c51pxd5o54bxu"]
 
 [ext_resource type="Script" uid="uid://b62ha0q2t47vt" path="res://Common/Inventory/InventoryData/InventoryData.gd" id="1_72n1t"]
 [ext_resource type="Script" uid="uid://bmme3bo1copuv" path="res://Common/Inventory/SlotData/SlotData.gd" id="2_plibu"]
 [ext_resource type="Resource" uid="uid://coth2agaf8v0" path="res://Common/Inventory/MenuItems/pause_button.tres" id="4_fyef2"]
 [ext_resource type="Script" uid="uid://bbhchfnnwvf6q" path="res://Common/Inventory/MenuItems/menu_item.gd" id="4_plibu"]
+[ext_resource type="Resource" uid="uid://3o2yt1ssrb0v" path="res://Common/Inventory/MenuItems/label_button.tres" id="5_r8n0s"]
 
 [sub_resource type="Resource" id="Resource_810ut"]
 script = ExtResource("2_plibu")
@@ -71,7 +72,13 @@ item_data = SubResource("Resource_y4ono")
 quantity = 1
 metadata/_custom_type_script = "uid://bmme3bo1copuv"
 
+[sub_resource type="Resource" id="Resource_gtrcw"]
+script = ExtResource("2_plibu")
+item_data = ExtResource("5_r8n0s")
+quantity = 1
+metadata/_custom_type_script = "uid://bmme3bo1copuv"
+
 [resource]
 script = ExtResource("1_72n1t")
-slot_datas = Array[ExtResource("2_plibu")]([SubResource("Resource_810ut"), SubResource("Resource_86j85"), SubResource("Resource_cqti0"), SubResource("Resource_jyhwh"), null, null, null, null, null, null, null, null, null, null, null, null, null, null])
+slot_datas = Array[ExtResource("2_plibu")]([SubResource("Resource_810ut"), SubResource("Resource_86j85"), SubResource("Resource_cqti0"), SubResource("Resource_jyhwh"), SubResource("Resource_gtrcw"), null, null, null, null, null, null, null, null, null, null, null, null, null])
 metadata/_custom_type_script = "uid://b62ha0q2t47vt"

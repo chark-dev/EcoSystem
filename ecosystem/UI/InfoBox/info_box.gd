@@ -16,12 +16,8 @@ func _ready() -> void:
 
 
 func open(type: int):
-	if !is_open:
-		self.show()
-		is_open = !is_open
-	else:
-		self.hide()
-		is_open = !is_open
+	is_open = !is_open
+	visible = is_open  # same as show/hide in one line
 	
 	match type:
 		0:

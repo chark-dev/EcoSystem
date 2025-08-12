@@ -1,12 +1,12 @@
 extends Node2D
 
-@export var beetle_scene: PackedScene
 
 @export var hatch_timer : float = 1
 var hatched : bool = false
 
 var entity_manager : EntityManager
 var level_manager : LevelManager
+var type : String
 
 
 func _physics_process(delta: float) -> void:
@@ -26,6 +26,6 @@ func _physics_process(delta: float) -> void:
 
 
 func hatch_egg():
-	Global.emit_signal("hatch_egg", global_position)
+	Global.emit_signal("hatch_egg", global_position, type)
 	
 	queue_free()

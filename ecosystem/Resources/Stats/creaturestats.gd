@@ -1,8 +1,8 @@
 extends Resource
 class_name CreatureStats
 
-@export var health : int
-@export var max_health : int
+@export var health : int 
+@export var max_health : int 
 @export var movement : int 
 @export var initiative : int
 @export var courage : int

@@ -20,7 +20,7 @@ func populate_hotbar(inventory_data: InventoryData):
 	for child in item_grid.get_children():
 		child.queue_free()
 	
-	for slot_data in inventory_data.slot_datas.slice(0, 4):
+	for slot_data in inventory_data.slot_datas.slice(0, 5):
 		var slot = Slot.instantiate()
 		item_grid.add_child(slot)
 		

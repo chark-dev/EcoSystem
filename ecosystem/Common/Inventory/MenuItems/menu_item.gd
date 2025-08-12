@@ -1,7 +1,7 @@
 extends ItemData
 class_name MenuItem
 
-enum TYPE {BEETLE, HERBIVORE, SNAKE, PAUSE}
+enum TYPE {BEETLE, HERBIVORE, SNAKE, PAUSE, LABEL}
 
 @export var type : TYPE
 
@@ -18,4 +18,6 @@ func use() -> void:
 			Global.emit_signal("snake_highlight", 2)
 		3:
 			Global.is_paused = !Global.is_paused
+		4:
+			Global.emit_signal("remove_label")
 	pass

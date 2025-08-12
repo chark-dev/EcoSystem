@@ -7,6 +7,8 @@ class_name EntityManager
 
 @export var level_manager : LevelManager
 
+
+
 var mammals : Array[Rabbit]
 
 func set_up(data : Dictionary):
@@ -48,17 +50,24 @@ func get_entities():
 func add_to_mammals(body):
 	mammals.append(body)
 
-func hatch_egg(position):
-	var new_beetle = beetle_scene.instantiate()
+func hatch_egg(position, type):
+	var new_entity : CharacterBody2D
+	match type:
+		'beetle':
+			new_entity = beetle_scene.instantiate()
+			Global.output_data['beetles_born'] += 1
+		'rabbit':
+			new_entity = rabbit_scene.instantiate()
+			Global.output_data['rabbits_born'] += 1
+		'snake':
+			new_entity = snake_scene.instantiate()
+			Global.output_data['snakes_born'] += 1
+	new_entity.entity_manager = self
+	new_entity.level_manager = level_manager
 	
+	new_entity.global_position = position
 	
-	
-	new_beetle.entity_manager = self
-	new_beetle.level_manager = level_manager
-	
-	new_beetle.global_position = position
-	
-	add_child(new_beetle)
+	add_child(new_entity)
 
 
 

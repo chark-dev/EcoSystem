@@ -71,6 +71,8 @@ func check_for_collision():
 	
 	if parent.closest_mammal and bodies.has(parent.closest_mammal):
 		print('Killed: ', parent.closest_mammal)
+		Global.output_data['rabbits_eaten_by_snakes'] += 1
+		Global.output_data['dead_rabbits'] += 1
 		attacking = false
 		parent.entity_manager.mammals.erase(parent.closest_mammal)
 

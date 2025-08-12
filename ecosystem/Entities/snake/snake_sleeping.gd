@@ -39,7 +39,7 @@ func exit():
 func lay_eggs():
 	reproducing = false
 	
-	var egg_count = randi_range(1, 3)
+	var egg_count = 1
 	
 	Global.output_data['beetle_eggs'] += egg_count
 	
@@ -48,6 +48,7 @@ func lay_eggs():
 		
 		new_egg.level_manager = level_manager
 		new_egg.entity_manager = entity_manager
+		new_egg.type = 'snake'
 		
 		new_egg.global_position = parent.global_position
 		entity_manager.add_child(new_egg)

@@ -44,6 +44,7 @@ func _ready():
 	var current_tile = level_manager.tile_map.local_to_map(global_position)
 	global_position = level_manager.tile_map.map_to_local(current_tile)
 	Global.connect("beetle_highlight", highlight)
+	Global.connect("remove_label", hide_label)
 	
 	var mat = $Sprite2D.material
 	if mat and mat is ShaderMaterial:
@@ -141,6 +142,8 @@ func highlight(i : int):
 		mat.set_shader_parameter("highlight_enabled", !is_highlighted)
 		is_highlighted = !is_highlighted
 
+func hide_label():
+	label.visible = not label.visible
 
 func set_mating():
 	pheromone_state.mating = true 

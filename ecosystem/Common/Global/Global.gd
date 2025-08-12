@@ -6,6 +6,7 @@ signal turn_complete
 signal beetle_highlight(num)
 signal herbi_highlight(num)
 signal snake_highlight(num)
+signal remove_label
 signal hatch_egg(position)
 
 signal time_tick(day: int, hour: int, minute: int)
@@ -24,11 +25,33 @@ var current_seed
 
 
 var output_data = {
-	'beetle_eggs' : 0,
+	'beetles_born' : 0,
+	'rabbits_born' : 0,
+	'snakes_born' : 0,
 	'dead_beetles' : 0,
 	'dead_rabbits' : 0,
 	'dead_snakes' : 0,
-	'food_dropped' : 0
+	'food_dropped' : 0,
+	'hide_places' : 0,
+	'days_passed' : 0,
+	'average_lifespan_beetle' : 0,
+	'average_lifespan_rabbit' : 0,
+	'average_lifespan_snake' : 0,
+	'max_population_beetles' : 0,
+	'max_population_rabbits' : 0,
+	'max_population_snakes' : 0,
+	'lowest_population_beetles' : 0,
+	'lowest_population_rabbits' : 0,
+	'lowest_population_snakes' : 0,
+	'food_eaten_beetles' : 0,
+	'food_eaten_rabbits' : 0,
+	'rabbits_eaten_by_snakes' : 0,
+	'beetle_pheromones_dropped' : 0,
+	'rabbit_pheromones_dropped' : 0,
+	'snake_pheromones_dropped' : 0,
+	'distance_traveled_beetles' : 0,
+	'distance_traveled_rabbits' : 0,
+	'distance_traveled_snakes' : 0
 }
 
 
