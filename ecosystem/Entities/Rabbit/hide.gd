@@ -12,12 +12,10 @@ var target_hide_tile : Vector2i
 
 func process_physics(delta):
 	if parent.global_position == level_manager.tile_map.map_to_local(target_hide_tile):
-		print('hiding')
 		parent.hide()
 		return sleep_state
 		
 	parent.move()
-	print("I am a beetle")
 	return null
 
 func enter():

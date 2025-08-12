@@ -14,6 +14,7 @@ const INGAME_TO_REAL_MINUTE_DURATION = (2 * PI) / MINUTES_PER_DAY
 var time: float = 0.0
 var past_minute: float = -1.0
 var past_day: int = -1
+var past_hour : int = -1
 
 func init(t) -> void:
 	time = INGAME_TO_REAL_MINUTE_DURATION * t * MINUTES_PER_HOUR
@@ -49,6 +50,10 @@ func recalculate_time():
 	if past_minute != minute:
 		past_minute = minute
 		Global.time_tick.emit(day, hour, minute)
+	
+	if past_hour != hour:
+		past_hour = hour
+		Global.hour_passed.emit(hour)
 	
 	if past_day != day:
 		past_day = day

@@ -8,7 +8,12 @@ var numEffectors : int = 8
 var target_pos : Vector2
 @export var root_pos : Vector2
 
+var parent : CharacterBody2D
+var level_manager : LevelManager
 
+func init(p, l):
+	parent = p
+	level_manager = l
 
 func _ready() -> void:
 	
@@ -36,7 +41,12 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	target_pos = to_local(get_global_mouse_position())
+	# Get the snake's movement direction and speed
+	var snake_direction = (level_manager.convert_path(parent.current_path.front()) - parent.global_position).normalized() if parent.current_path.size() > 0 else Vector2.ZERO
+	
+	# Calculate the new target position for the limb based on snake's position + movement offset
+	target_pos = to_local(parent.global_position + snake_direction * parent.speed)
+	
 	fabrikF()
 	fabrikB()
 	queue_redraw()

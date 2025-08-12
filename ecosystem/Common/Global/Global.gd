@@ -10,6 +10,7 @@ signal hatch_egg(position)
 
 signal time_tick(day: int, hour: int, minute: int)
 signal day_passed(day : int)
+signal hour_passed(hour : int)
 
 @onready var main_scene = preload("res://Stages/procedural_test/procedural_test.tscn")
 @onready var results_scene = preload("res://UI/Results/results_scene.tscn")
@@ -24,7 +25,10 @@ var current_seed
 
 var output_data = {
 	'beetle_eggs' : 0,
-	'dead_beetles' : 0
+	'dead_beetles' : 0,
+	'dead_rabbits' : 0,
+	'dead_snakes' : 0,
+	'food_dropped' : 0
 }
 
 

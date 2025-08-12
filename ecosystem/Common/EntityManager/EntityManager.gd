@@ -134,4 +134,4 @@ func get_snake_mating():
 	if male == 0 or female == 0:
 		return str(0)
 	
-	return str("Males: " + male + " Females: " + female)
+	return str("Males: " + str(male) + " Females: " + str(female))

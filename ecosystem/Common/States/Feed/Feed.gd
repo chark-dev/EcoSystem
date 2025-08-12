@@ -56,5 +56,6 @@ func eat_food_at_tile(tile_pos: Vector2i) -> void:
 			for smell in smells_to_remove:
 				level_manager.tile_map.smell_map.erase(smell)
 				smell.queue_free()
+				parent.is_hungry = false
 
 			break

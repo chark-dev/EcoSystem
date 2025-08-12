@@ -25,6 +25,7 @@ var pheromone_map = []
 var land_tiles = {}
 
 
+
 func init() -> void:
 	moisture.seed = randi()
 	temperature.seed = randi()
@@ -32,10 +33,11 @@ func init() -> void:
 	generate_chunk(target_origin)
 	queue_redraw()
 
+func _ready() -> void:
+	Global.connect("hour_passed", spawn_food_hour)
 
 
-#func _process(delta: float) -> void:
-	#queue_redraw()
+
 
 
 func generate_chunk(target_origin):
@@ -81,6 +83,21 @@ func spawn_food(tile_pos: Vector2i):
 			"tile": tile_pos,
 			"node": food
 		})
+		
+		
+
+func spawn_food_hour(hour: int):
+	var food = food_scene.instantiate()
+	food.position = map_to_local(get_random_tile())
+	add_child(food)
+	add_smell(local_to_map(food.position))
+	
+	food_map.append({
+	"tile": local_to_map(food.position),
+	"node": food
+	})
+	
+	
 
 func add_smell(center: Vector2i):
 	var offsets = [

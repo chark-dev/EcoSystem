@@ -16,6 +16,10 @@ func _display_data():
 	var text = ""
 	for key in Global.ecosystem_data.keys():
 		text += str(key) + ": " + str(Global.ecosystem_data[key]) + "\n"
+	
+	for key in Global.output_data.keys():
+		text += str(key) + ": " + str(Global.output_data[key]) + "\n"
+	
 	data_label.text = text
 
 

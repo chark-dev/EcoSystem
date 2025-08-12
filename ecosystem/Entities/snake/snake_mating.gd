@@ -6,6 +6,8 @@ var mating : bool = false
 var search_range : int 
 @export var idle_state : SnakeIdle
 
+var mate_timer : float = 20
+
 func enter():
 	parent.label.text = 'Mating: Male'
 	
@@ -25,7 +27,12 @@ func process_physics(delta):
 	if mate:
 		if level_manager.tile_map.local_to_map(parent.global_position) == level_manager.tile_map.local_to_map(mate.global_position):
 			mate_with_partner()
-		
+	
+	mate_timer -= delta
+	
+	if mate_timer <= 0:
+		parent.mate_timer = 30
+		return idle_state
 	
 	
 	parent.move()
@@ -52,7 +59,7 @@ func search_for_mate():
 				continue
 			
 			for pheromone in level_manager.tile_map.pheromone_map:
-				if pheromone.source is Beetle:
+				if pheromone.source is Snake:
 					var p_tile = pheromone.tile_pos
 					if p_tile == tile:
 						

@@ -13,7 +13,15 @@ func process_physics(delta):
 
 func enter():
 	parent.label.text = "Death"
-	Global.output_data['dead_beetles'] += 1
+	
+	if parent is Beetle:
+		Global.output_data['dead_beetles'] += 1
+	
+	if parent is Rabbit:
+		Global.output_data['dead_rabbits'] += 1
+	
+	if parent is Snake:
+		Global.output_data['dead_snakes'] += 1
 	
 	die()
 

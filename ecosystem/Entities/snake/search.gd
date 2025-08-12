@@ -60,7 +60,7 @@ func search():
 				continue
 			for hide in level_manager.tile_map.hide_map:
 				if hide.hide_source_tile == tile:
-					print("Found hide tile at :", tile)
+
 					parent.hide_places.append(tile)
 			if parent.is_hungry:
 				for mammal in parent.entity_manager.mammals:

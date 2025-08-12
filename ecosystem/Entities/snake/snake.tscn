@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cp760ibj4jfmp"]
+[gd_scene load_steps=17 format=3 uid="uid://cp760ibj4jfmp"]
 
 [ext_resource type="Script" uid="uid://wmeho15wci6c" path="res://Entities/snake/snake.gd" id="1_8bwt7"]
 [ext_resource type="Script" uid="uid://bihb7vjbs5g22" path="res://Resources/Stats/creaturestats.gd" id="2_kqs2o"]
@@ -11,7 +11,6 @@
 [ext_resource type="Script" uid="uid://3xfsru7jowgc" path="res://Entities/snake/snake_mating.gd" id="7_asgo4"]
 [ext_resource type="Script" uid="uid://d3k18ua8b4noi" path="res://Entities/snake/snake_sleeping.gd" id="8_s1uyp"]
 [ext_resource type="Shader" uid="uid://c4fjp7xtvfffk" path="res://Common/Shaders/Glow.gdshader" id="10_vcwob"]
-[ext_resource type="Script" uid="uid://0ualjm1qovg0" path="res://Common/Physics/Body/Body.gd" id="11_arqwi"]
 [ext_resource type="Script" uid="uid://c3vfid6834u4w" path="res://Entities/snake/pheromone_snake.gd" id="11_qk4py"]
 [ext_resource type="Texture2D" uid="uid://dclby5ninn5xp" path="res://Screenshot 2025-08-08 at 16.19.53.png" id="12_kqs2o"]
 
@@ -38,11 +37,12 @@ shader_parameter/pulse_strength = 1.0
 radius = 26.0
 height = 52.0
 
-[node name="Snake" type="CharacterBody2D" node_paths=PackedStringArray("body", "death_state")]
+[node name="Snake" type="CharacterBody2D" node_paths=PackedStringArray("death_state", "pheromone_state", "mate_state")]
 collision_mask = 2
 script = ExtResource("1_8bwt7")
-body = NodePath("Body")
 death_state = NodePath("StateMachine/Death")
+pheromone_state = NodePath("StateMachine/Pheromone")
+mate_state = NodePath("StateMachine/Mating")
 stats = SubResource("Resource_qk4py")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("start_state")]
@@ -69,8 +69,9 @@ sleep_state = NodePath("../Sleeping")
 script = ExtResource("5_qq8ia")
 idle_state = NodePath("../Idle")
 
-[node name="Mating" type="Node" parent="StateMachine"]
+[node name="Mating" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state")]
 script = ExtResource("7_asgo4")
+idle_state = NodePath("../Idle")
 
 [node name="Sleeping" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state")]
 script = ExtResource("8_s1uyp")
@@ -79,8 +80,10 @@ idle_state = NodePath("../Idle")
 [node name="Death" type="Node" parent="StateMachine"]
 script = ExtResource("6_qdids")
 
-[node name="Pheromone" type="Node" parent="StateMachine"]
+[node name="Pheromone" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "hide_state")]
 script = ExtResource("11_qk4py")
+idle_state = NodePath("../Idle")
+hide_state = NodePath("../Hide")
 metadata/_custom_type_script = "uid://d4kst6ssnyiuf"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -93,11 +96,6 @@ offset_left = -20.0
 offset_top = -37.0
 offset_right = 20.0
 offset_bottom = -14.0
-
-[node name="Body" type="Node2D" parent="."]
-visible = false
-script = ExtResource("11_arqwi")
-metadata/_custom_type_script = "uid://0ualjm1qovg0"
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2

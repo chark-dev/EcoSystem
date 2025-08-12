@@ -56,16 +56,18 @@ func search():
 			# Optional: skip out-of-range tiles if using circular search
 			if offset.length() > search_range:
 				continue
-			for smell in level_manager.tile_map.smell_map:
-				var smell_tile = level_manager.tile_map.local_to_map(smell.position)
-				if smell_tile == tile:
-					feed_state.food_position = smell.food_source_tile
-					found_food = true
-					break
+			if parent.is_hungry:
+				for smell in level_manager.tile_map.smell_map:
+					var smell_tile = level_manager.tile_map.local_to_map(smell.position)
+					if smell_tile == tile:
+						feed_state.food_position = smell.food_source_tile
+						found_food = true
+						break
 			for hide in level_manager.tile_map.hide_map:
 				if hide.hide_source_tile == tile:
 					parent.hide_places.append(tile)
 					
+
 			if not level_manager.astar_grid.is_point_solid(tile):
 				target_tiles.append(tile)
 	

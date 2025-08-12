@@ -10,14 +10,19 @@ var target_hide_tile : Vector2i
 
 @export var food_amount_for_hide : int
 
+var has_eggs : bool = false
+
 func process_physics(delta):
 	if parent.global_position == level_manager.tile_map.map_to_local(target_hide_tile):
-		print('hiding')
 		parent.hide()
+		
+		if has_eggs:
+			sleep_state.reproducing = true
+		
 		return sleep_state
 		
 	parent.move()
-	print("I am a beetle")
+
 	return null
 
 func enter():

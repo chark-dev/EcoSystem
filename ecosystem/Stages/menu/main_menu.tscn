@@ -59,7 +59,7 @@ text = "Num of Snakes :"
 
 [node name="snakes_slider" type="HSlider" parent="VBoxContainer"]
 layout_mode = 2
-max_value = 10.0
+max_value = 20.0
 
 [node name="start_button" type="Button" parent="VBoxContainer"]
 layout_mode = 2

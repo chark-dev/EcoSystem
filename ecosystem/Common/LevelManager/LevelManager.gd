@@ -125,3 +125,11 @@ func get_predator_tiles() -> Array[Vector2i]:
 
 func get_creatures():
 	return EManager.get_entities()
+
+
+
+func is_tile_solid_safe(tile: Vector2i) -> bool:
+	var size = astar_grid.size
+	if tile.x < 0 or tile.y < 0 or tile.x >= size.x or tile.y >= size.y:
+		return true # Treat out-of-bounds as solid
+	return astar_grid.is_point_solid(tile)

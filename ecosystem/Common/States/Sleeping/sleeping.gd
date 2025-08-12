@@ -33,6 +33,7 @@ func exit():
 	
 	parent.sleep_timer = 30
 	awake_timer = 30
+	parent.is_hungry = true
 
 
 func lay_eggs():

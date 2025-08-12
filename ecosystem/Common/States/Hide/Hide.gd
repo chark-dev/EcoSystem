@@ -23,7 +23,6 @@ func process_physics(delta):
 		return sleep_state
 		
 	parent.move()
-	print("I am a beetle")
 	return null
 
 func enter():
