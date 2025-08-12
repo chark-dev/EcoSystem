@@ -6,7 +6,7 @@ extends CanvasLayer
 
 
 func _ready():
-	canvas_modulate.time_tick.connect(set_time)
+	Global.time_tick.connect(set_time)
 
 func set_time(day: int, hour: int, minute: int):
 	pass

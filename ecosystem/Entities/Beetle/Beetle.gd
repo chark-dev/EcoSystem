@@ -5,8 +5,8 @@ enum TurnState { IDLE, MOVING, ACTING }
 var turn_state : TurnState = TurnState.IDLE
 
 @export var sleep_timer : float = 35
-@export var death_timer : float = 30
-var mate_timer : float = death_timer / 2
+@export var death_timer : float = 150
+var mate_timer : float = death_timer / 5
 
 var tile_highlights: Array[Polygon2D] = []
 
@@ -67,8 +67,8 @@ func _physics_process(delta: float) -> void:
 	death_timer -= delta
 	mate_timer -= delta
 	
-	#if death_timer <= 0:
-		#state_machine.change_state(death_state)
+	if death_timer <= 0:
+		state_machine.change_state(death_state)
 	
 	
 	state_machine.process_physics(delta)

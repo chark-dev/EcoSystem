@@ -13,3 +13,12 @@ func process_physics(delta):
 
 func enter():
 	parent.label.text = "Death"
+	Global.output_data['dead_beetles'] += 1
+	
+	die()
+
+
+func die():
+	await get_tree().create_timer(3).timeout
+	
+	parent.queue_free()

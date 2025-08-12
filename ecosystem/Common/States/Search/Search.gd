@@ -64,7 +64,6 @@ func search():
 					break
 			for hide in level_manager.tile_map.hide_map:
 				if hide.hide_source_tile == tile:
-					print("Found hide tile at :", tile)
 					parent.hide_places.append(tile)
 					
 			if not level_manager.astar_grid.is_point_solid(tile):

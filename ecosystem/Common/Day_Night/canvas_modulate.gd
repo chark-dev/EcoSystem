@@ -1,7 +1,7 @@
 extends CanvasModulate
 
 @export var gradient: GradientTexture1D
-@export var INGAME_SPEED = 5
+@export var INGAME_SPEED = 50
 @export var initial_hour = 12
 
 const MINUTES_PER_DAY = 1440
@@ -9,13 +9,16 @@ const MINUTES_PER_HOUR = 60
 
 const INGAME_TO_REAL_MINUTE_DURATION = (2 * PI) / MINUTES_PER_DAY
 
-signal time_tick(day: int, hour: int, minute: int)
+
 
 var time: float = 0.0
 var past_minute: float = -1.0
+var past_day: int = -1
 
 func init(t) -> void:
 	time = INGAME_TO_REAL_MINUTE_DURATION * t * MINUTES_PER_HOUR
+	var total_minutes = int(time / INGAME_TO_REAL_MINUTE_DURATION)
+	past_day = int(total_minutes / MINUTES_PER_DAY)
 
 
 func _process(delta: float):
@@ -45,4 +48,8 @@ func recalculate_time():
 	
 	if past_minute != minute:
 		past_minute = minute
-		time_tick.emit(day, hour, minute)
+		Global.time_tick.emit(day, hour, minute)
+	
+	if past_day != day:
+		past_day = day
+		Global.day_passed.emit(day)

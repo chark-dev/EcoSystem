@@ -58,13 +58,13 @@ offset_bottom = 40.0
 
 [node name="day_label" type="Label" parent="CanvasLayer/Time/VBoxContainer"]
 layout_mode = 2
-text = "Day: "
+text = "Day: 0"
 
-[node name="time_label" type="Label" parent="CanvasLayer/Time/VBoxContainer" node_paths=PackedStringArray("time")]
+[node name="time_label" type="Label" parent="CanvasLayer/Time/VBoxContainer" node_paths=PackedStringArray("day_label")]
 layout_mode = 2
 text = "Time:"
 script = ExtResource("13_bmc0x")
-time = NodePath("../../../../CanvasModulate")
+day_label = NodePath("../day_label")
 
 [node name="HotBarInventory" parent="CanvasLayer" node_paths=PackedStringArray("inventory_interface") instance=ExtResource("11_xyxra")]
 inventory_interface = NodePath("../InventoryInterface")

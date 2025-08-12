@@ -3,7 +3,7 @@ extends Node2D
 
 var tile_pos : Vector2i
 var source : CharacterBody2D
-var lifetime = 50
+var lifetime = 25
 
 
 func _process(delta):
