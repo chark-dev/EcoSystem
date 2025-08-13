@@ -16,17 +16,18 @@ func enter():
 	
 	if parent is Beetle:
 		Global.output_data['dead_beetles'] += 1
+		Global.emit_signal("creature_died", 'beetle')
 	
 	if parent is Rabbit:
 		Global.output_data['dead_rabbits'] += 1
+		Global.emit_signal("creature_died", 'rabbit')
 	
 	if parent is Snake:
 		Global.output_data['dead_snakes'] += 1
+		Global.emit_signal("creature_died", 'snake')
 	
 	die()
 
 
 func die():
-	await get_tree().create_timer(3).timeout
-	
 	parent.queue_free()

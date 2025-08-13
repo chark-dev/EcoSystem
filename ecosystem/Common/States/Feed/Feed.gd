@@ -45,6 +45,7 @@ func eat_food_at_tile(tile_pos: Vector2i) -> void:
 			print("Removed Food.")
 			level_manager.tile_map.food_map.remove_at(i)
 			parent.stats.hunger -= 1
+			Global.output_data['food_eaten_beetles'] += 1
 			print("Beetle ate food at ", tile_pos)
 
 			# 🧼 Remove smells associated with this food tile

@@ -3,7 +3,7 @@ class_name Rabbit
 
 @export var sleep_timer : float = 35
 @export var death_timer : float = 500
-var mate_timer : float = death_timer / 2
+var mate_timer : float = 25
 
 
 var home_tile : Vector2i
@@ -57,6 +57,7 @@ func _physics_process(delta: float) -> void:
 	sleep_timer -= delta
 	death_timer -= delta
 	
+	
 	if death_timer <= 0:
 		state_machine.change_state(death_state)
 	
@@ -80,9 +81,10 @@ func move() -> bool:
 	
 	if global_position == target_position:
 		var current_path_tile = current_path.pop_front()
+		Global.output_data['distance_traveled_rabbits'] += 1
 		
-		if is_mating:
-			level_manager.tile_map.drop_pheromone(current_path_tile, self)
+		#if is_mating:
+			#level_manager.tile_map.drop_pheromone(current_path_tile, self)
 	
 	return current_path.is_empty()
 

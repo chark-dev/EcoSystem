@@ -22,7 +22,7 @@ var hovered_entity
 func _ready():
 	var data = Global.ecosystem_data
 	
-	time_manager.init(data['start_time'])
+	time_manager.init(0)
 	
 	
 	

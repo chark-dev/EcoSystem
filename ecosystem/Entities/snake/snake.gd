@@ -3,9 +3,9 @@ class_name Snake
 
 
 
-@export var sleep_timer : float = 35
-@export var death_timer : float = 500
-@export var mate_timer : float = death_timer / 6
+@export var sleep_timer : float = randf_range(100, 125)
+@export var death_timer : float = randf_range(400, 500)
+@export var mate_timer : float = 25
 @export var speed : float = 1
 
 @onready var collision_area : Area2D = $Area2D
@@ -97,6 +97,7 @@ func move() -> bool:
 	global_position = global_position.move_toward(target_position, speed)
 	
 	if global_position == target_position:
+		Global.output_data['distance_traveled_snakes'] += 1
 		current_path.pop_front()
 	
 	return current_path.is_empty()

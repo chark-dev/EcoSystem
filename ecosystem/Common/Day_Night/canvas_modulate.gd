@@ -1,7 +1,7 @@
 extends CanvasModulate
 
 @export var gradient: GradientTexture1D
-@export var INGAME_SPEED = 50
+@export var INGAME_SPEED = 10
 @export var initial_hour = 12
 
 const MINUTES_PER_DAY = 1440
@@ -57,4 +57,5 @@ func recalculate_time():
 	
 	if past_day != day:
 		past_day = day
+		Global.output_data['days_passed'] += 1
 		Global.day_passed.emit(day)

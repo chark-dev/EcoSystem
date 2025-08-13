@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dpy8ah0mw8qu0"]
+[gd_scene load_steps=18 format=3 uid="uid://dpy8ah0mw8qu0"]
 
 [ext_resource type="Script" uid="uid://t1u03opvyfvy" path="res://Common/FSM/StateMachine/StateMachine.gd" id="1_24a0s"]
 [ext_resource type="Script" uid="uid://bcff6gykh67ru" path="res://Entities/Rabbit/rabbit.gd" id="1_ikes2"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://d1dt5bpd2p35o" path="res://Entities/Rabbit/feed.gd" id="6_tr8io"]
 [ext_resource type="Script" uid="uid://bm2yoi6d7xaru" path="res://Entities/Rabbit/mating.gd" id="7_gcmjl"]
 [ext_resource type="Script" uid="uid://o2gksb4h4r6q" path="res://Entities/Rabbit/create_home.gd" id="10_brxdb"]
+[ext_resource type="Script" uid="uid://clv1ptrfpg2j5" path="res://Entities/Rabbit/pheromone.gd" id="12_74mit"]
 [ext_resource type="Shader" uid="uid://c4fjp7xtvfffk" path="res://Common/Shaders/Glow.gdshader" id="12_nlcxm"]
 [ext_resource type="Texture2D" uid="uid://ctrp51cmqlpe5" path="res://Screenshot 2025-08-08 at 16.21.24.png" id="13_nlcxm"]
 
@@ -67,8 +68,9 @@ sleep_state = NodePath("../Sleeping")
 script = ExtResource("6_tr8io")
 idle_state = NodePath("../Idle")
 
-[node name="Mating" type="Node" parent="StateMachine"]
+[node name="Mating" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state")]
 script = ExtResource("7_gcmjl")
+idle_state = NodePath("../Idle")
 
 [node name="Sleeping" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state")]
 script = ExtResource("4_mtir0")
@@ -80,6 +82,11 @@ script = ExtResource("4_yg0qy")
 [node name="CreateHome" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state")]
 script = ExtResource("10_brxdb")
 idle_state = NodePath("../Idle")
+
+[node name="Pheromone" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "hide_state")]
+script = ExtResource("12_74mit")
+idle_state = NodePath("../Idle")
+hide_state = NodePath("../Hide")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_74mit")

@@ -30,14 +30,6 @@ text = "Seed:"
 [node name="seed_input" type="LineEdit" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="Starting Time" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-text = "Starting Time"
-
-[node name="time_input" type="HSlider" parent="VBoxContainer"]
-layout_mode = 2
-max_value = 24.0
-
 [node name="Beetles Count" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "Num of Beetles :"

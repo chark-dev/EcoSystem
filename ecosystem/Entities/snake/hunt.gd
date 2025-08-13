@@ -73,6 +73,7 @@ func check_for_collision():
 		print('Killed: ', parent.closest_mammal)
 		Global.output_data['rabbits_eaten_by_snakes'] += 1
 		Global.output_data['dead_rabbits'] += 1
+		Global.emit_signal("creature_died", 'rabbit')
 		attacking = false
 		parent.entity_manager.mammals.erase(parent.closest_mammal)
 

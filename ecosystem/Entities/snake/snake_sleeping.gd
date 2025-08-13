@@ -41,7 +41,6 @@ func lay_eggs():
 	
 	var egg_count = 1
 	
-	Global.output_data['beetle_eggs'] += egg_count
 	
 	for i in egg_count:
 		var new_egg = egg.instantiate()

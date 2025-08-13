@@ -4,8 +4,8 @@ class_name Beetle
 enum TurnState { IDLE, MOVING, ACTING }
 var turn_state : TurnState = TurnState.IDLE
 
-@export var sleep_timer : float = 35
-@export var death_timer : float = 150
+@export var sleep_timer : float = randf_range(30, 35)
+@export var death_timer : float = randf_range(300, 500)
 var mate_timer : float = death_timer / 5
 
 var tile_highlights: Array[Polygon2D] = []
@@ -91,6 +91,7 @@ func move() -> bool:
 	global_position = global_position.move_toward(target_position, 1)
 	
 	if global_position == target_position:
+		Global.output_data['distance_traveled_beetles'] += 1
 		current_path.pop_front()
 	
 	return current_path.is_empty()

@@ -2,10 +2,10 @@ extends State
 class_name RabbitMating
 
 
-var mate : Snake = null
+var mate : Rabbit = null
 var mating : bool = false
 var search_range : int 
-@export var idle_state : SnakeIdle
+@export var idle_state : RabbitIdle
 
 var mate_timer : float = 20
 
@@ -60,7 +60,7 @@ func search_for_mate():
 				continue
 			
 			for pheromone in level_manager.tile_map.pheromone_map:
-				if pheromone.source is Snake:
+				if pheromone.source is Rabbit:
 					var p_tile = pheromone.tile_pos
 					if p_tile == tile:
 						

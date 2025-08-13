@@ -1,8 +1,8 @@
 extends State
-class_name SnakePheromone
+class_name RabbitPheromone
 
-@export var idle_state : SnakeIdle
-@export var hide_state : SnakeHide
+@export var idle_state : RabbitIdle
+@export var hide_state : RabbitHide
 
 var mating = false
 
@@ -89,7 +89,7 @@ func set_next_patrol_target():
 
 func rest_for_mate():
 	level_manager.tile_map.drop_pheromone(current_path_tile, parent)
-	Global.output_data['snake_pheromones_dropped'] += 1
+	Global.output_data['rabbit_pheromones_dropped'] += 1
 	await get_tree().create_timer(15).timeout
 	
 	

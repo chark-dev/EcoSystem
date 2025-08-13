@@ -40,6 +40,7 @@ func set_up(data : Dictionary):
 
 func _ready() -> void:
 	Global.connect("hatch_egg", hatch_egg)
+	Global.connect("creature_died", on_creature_died)
 
 func spawn_entities(data : Dictionary):
 	pass
@@ -56,12 +57,18 @@ func hatch_egg(position, type):
 		'beetle':
 			new_entity = beetle_scene.instantiate()
 			Global.output_data['beetles_born'] += 1
+			if int(get_beetle_count()) > Global.ecosystem_data['beetles_count']:
+				Global.output_data['max_population_beetles'] = int(get_beetle_count())
 		'rabbit':
 			new_entity = rabbit_scene.instantiate()
 			Global.output_data['rabbits_born'] += 1
+			if int(get_herbi_count()) > Global.ecosystem_data['rabbits_count']:
+				Global.output_data['max_population_rabbits'] = int(get_herbi_count())
 		'snake':
 			new_entity = snake_scene.instantiate()
 			Global.output_data['snakes_born'] += 1
+			if int(get_snake_count()) > Global.ecosystem_data['snakes_count']:
+				Global.output_data['max_population_snakes'] = int(get_snake_count())
 	new_entity.entity_manager = self
 	new_entity.level_manager = level_manager
 	
@@ -69,6 +76,17 @@ func hatch_egg(position, type):
 	
 	add_child(new_entity)
 
+func on_creature_died(type : String):
+	match type:
+		'beetle':
+			if Global.output_data['lowest_population_beetles'] > int(get_beetle_count()):
+				Global.output_data['lowest_population_beetles'] = int(get_beetle_count())
+		'rabbit':
+			if Global.output_data['lowest_population_rabbits'] > int(get_herbi_count()):
+				Global.output_data['lowest_population_rabbits'] = int(get_herbi_count())
+		'snake':
+			if Global.output_data['lowest_population_snakes'] > int(get_snake_count()):
+				Global.output_data['lowest_population_snakes'] = int(get_snake_count())
 
 
 func get_beetle_count():

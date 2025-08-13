@@ -19,7 +19,6 @@ func _ready():
 	beetles_slider.value_changed.connect(_update_beetles_label)
 	rabbits_slider.value_changed.connect(_update_rabbits_label)
 	snakes_slider.value_changed.connect(_update_snakes_label)
-	time_input.value_changed.connect(_update_time_label)
 	start_button.pressed.connect(_on_start_pressed)
 
 func _update_seed(value):
@@ -42,17 +41,17 @@ func _update_rabbits_label(value):
 func _update_snakes_label(value):
 	snakes_value_label.text = 'Num of Snakes: ' + str(value)
 
-func _update_time_label(value):
-	time_value_label.text = 'Chosen Time: ' + str(value)
+
 
 func _on_start_pressed():
 	var data = {}
 	data['ecosystem_name'] = name_input.text
-	data['start_time'] = time_input.value
 	data['beetles_count'] = beetles_slider.value
 	data['rabbits_count'] = rabbits_slider.value
 	data['snakes_count'] = snakes_slider.value
 	data['seed'] = seed_input.text
+	
+	
 
 	# You can now pass this data to your simulation
 	Global.set_up_ecosystem(data)

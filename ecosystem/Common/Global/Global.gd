@@ -13,6 +13,8 @@ signal time_tick(day: int, hour: int, minute: int)
 signal day_passed(day : int)
 signal hour_passed(hour : int)
 
+signal creature_died(type : String)
+
 @onready var main_scene = preload("res://Stages/procedural_test/procedural_test.tscn")
 @onready var results_scene = preload("res://UI/Results/results_scene.tscn")
 @onready var day_passed_dialog_scene = preload("res://UI/Confimation/confirmation_dialog.tscn")
@@ -34,9 +36,6 @@ var output_data = {
 	'food_dropped' : 0,
 	'hide_places' : 0,
 	'days_passed' : 0,
-	'average_lifespan_beetle' : 0,
-	'average_lifespan_rabbit' : 0,
-	'average_lifespan_snake' : 0,
 	'max_population_beetles' : 0,
 	'max_population_rabbits' : 0,
 	'max_population_snakes' : 0,
@@ -81,6 +80,12 @@ func _on_day_passed_decision(choice: bool):
 	
 
 func set_up_ecosystem(data : Dictionary):
+	output_data['max_population_beetles'] = data['beetles_count']
+	output_data['lowest_population_beetles'] = data['beetles_count']
+	output_data['max_population_rabbits'] = data['rabbits_count']
+	output_data['lowest_population_rabbits'] = data['rabbits_count']
+	output_data['max_population_snakes'] = data['snakes_count']
+	output_data['lowest_population_snakes'] = data['snakes_count']
 #	check if any dict values are empty, then set defaults. 
 	
 	print('This is the autoload:', data)
