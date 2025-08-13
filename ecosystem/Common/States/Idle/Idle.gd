@@ -1,7 +1,7 @@
 extends State
 class_name Idle 
 
-var idle_timer = 0.0
+var idle_timer = randf_range(1.0, 3.0)
 @export var search_state : Search
 @export var hide_state : Hide
 @export var mate_state : Mating

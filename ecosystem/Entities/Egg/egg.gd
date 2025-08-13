@@ -1,7 +1,7 @@
 extends Node2D
 
 
-@export var hatch_timer : float = 30
+@export var hatch_timer : float = 7
 var hatched : bool = false
 
 var entity_manager : EntityManager

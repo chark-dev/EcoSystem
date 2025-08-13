@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://xec41wru57i0"]
+[gd_scene load_steps=14 format=3 uid="uid://xec41wru57i0"]
 
 [ext_resource type="Script" uid="uid://l0dhwym56si4" path="res://Common/LevelManager/LevelManager.gd" id="1_q82ol"]
 [ext_resource type="TileSet" uid="uid://dexlrlyjvv6ha" path="res://Stages/tilesets/example_tileset.tres" id="1_vnikk"]
@@ -13,7 +13,6 @@
 [ext_resource type="PackedScene" uid="uid://s4uir2lfecl4" path="res://UI/HotBar/hot_bar_inventory.tscn" id="11_xyxra"]
 [ext_resource type="Script" uid="uid://dbxf0ol4w2skb" path="res://Common/Time/time_label.gd" id="13_bmc0x"]
 [ext_resource type="PackedScene" uid="uid://nsrvxq81t54h" path="res://UI/InfoBox/info_box.tscn" id="13_mle0n"]
-[ext_resource type="Script" uid="uid://capayb37h4kbh" path="res://UI/InfoBox/info_box.gd" id="14_6fb60"]
 
 [node name="ProceduralTest" type="Node2D" node_paths=PackedStringArray("tile_map", "EManager", "time_manager")]
 script = ExtResource("1_q82ol")
@@ -71,11 +70,7 @@ inventory_interface = NodePath("../InventoryInterface")
 
 [node name="InfoBox" parent="CanvasLayer" node_paths=PackedStringArray("entity_manager") instance=ExtResource("13_mle0n")]
 visible = false
-script = ExtResource("14_6fb60")
 entity_manager = NodePath("../../EntityManager")
-
-[node name="Label2" parent="CanvasLayer/InfoBox/ColorRect/VBoxContainer" index="1"]
-text = ""
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("7_kjmio")

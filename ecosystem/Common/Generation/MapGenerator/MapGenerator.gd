@@ -19,6 +19,8 @@ var mammal_smell_map = []
 var food_map = []
 var hide_map = []
 
+var food_spawn_positions = []
+
 
 var pheromone_map = []
 
@@ -74,6 +76,7 @@ func spawn_hide_place(tile_pos: Vector2i):
 
 func spawn_food(tile_pos: Vector2i):
 	if randf() < 0.05:
+		food_spawn_positions.append(tile_pos)
 		Global.output_data['food_dropped'] += 1
 		var food = food_scene.instantiate()
 		food.position = map_to_local(tile_pos)
@@ -89,16 +92,18 @@ func spawn_food(tile_pos: Vector2i):
 		
 
 func spawn_food_hour(hour: int):
-	Global.output_data['food_dropped'] += 1
-	var food = food_scene.instantiate()
-	food.position = map_to_local(get_random_tile())
-	add_child(food)
-	add_smell(local_to_map(food.position))
-	
-	food_map.append({
-	"tile": local_to_map(food.position),
-	"node": food
-	})
+	for i in range(2):
+		print('Dropping 2 food')
+		Global.output_data['food_dropped'] += 1
+		var food = food_scene.instantiate()
+		food.position = map_to_local(food_spawn_positions[randi() % food_spawn_positions.size()])
+		add_child(food)
+		add_smell(local_to_map(food.position))
+		
+		food_map.append({
+		"tile": local_to_map(food.position),
+		"node": food
+		})
 	
 	
 

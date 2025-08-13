@@ -17,7 +17,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(100, 290)
 layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/ScrollContainer"]
@@ -33,7 +33,6 @@ text = "Return To Menu."
 
 [node name="FileDialog" type="FileDialog" parent="."]
 access = 2
-filters = PackedStringArray("")
 
 [connection signal="pressed" from="VBoxContainer/save" to="." method="_on_save_pressed"]
 [connection signal="pressed" from="VBoxContainer/exit" to="." method="_on_exit_pressed"]

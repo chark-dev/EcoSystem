@@ -12,6 +12,7 @@ const MAIN_MENU = preload("res://Stages/menu/main_menu.tscn")
 func _ready():
 	_display_data()
 
+
 func _display_data():
 	var text = ""
 	for key in Global.ecosystem_data.keys():
@@ -29,8 +30,8 @@ func _display_data():
 
 func _save_data_to_file():
 	file_dialog.show()
-	
-
+	save_button.hide()
+	main_menu_button.hide()
 	
 
 
@@ -44,7 +45,22 @@ func _on_exit_pressed() -> void:
 
 
 func _on_file_dialog_file_selected(path: String) -> void:
+	var combined_data = {
+		"initial_data" : Global.ecosystem_data,
+		"output_data" : Global.output_data
+	}
+	
+	
+	
+	
+	var json_text = JSON.stringify(combined_data, "\t")
+	
 	var file = FileAccess.open(path, FileAccess.WRITE)
 	
-	var json_text = JSON.stringify(data_label.text)
+	
 	file.store_string(json_text)
+	
+	file.close()
+	
+	save_button.show()
+	main_menu_button.show()

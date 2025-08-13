@@ -111,10 +111,13 @@ func execute_action():
 	pass
 
 func highlight(i : int):
+	var should_highlight = (i == 2)
+	
+	is_highlighted = should_highlight
 	var mat = $Sprite2D.material
 	if mat and mat is ShaderMaterial:
-		mat.set_shader_parameter("highlight_enabled", !is_highlighted)
-		is_highlighted = !is_highlighted
+		mat.set_shader_parameter("highlight_enabled", is_highlighted)
+
 
 func hide_label():
 	label.visible = not label.visible

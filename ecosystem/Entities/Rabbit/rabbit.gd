@@ -3,10 +3,12 @@ class_name Rabbit
 
 @export var sleep_timer : float = 35
 @export var death_timer : float = 500
-var mate_timer : float = 25
+var mate_timer : float = 20
 
 
 var home_tile : Vector2i
+
+var speed : float = 1.5
 
 
 @export var level_manager : LevelManager
@@ -15,6 +17,7 @@ var home_tile : Vector2i
 @onready var state_machine = $StateMachine
 @export var death_state : Death
 @export var mate_state : RabbitMating
+@export var pheromone_state : RabbitPheromone
 
 @export var stats : CreatureStats
 
@@ -23,6 +26,7 @@ var home_tile : Vector2i
 var is_moving = false
 var is_hungry = true
 var is_mating = false
+var has_mated = false
 var is_highlighted = false
 var current_path : Array[Vector2i]
 var current_point_path
@@ -36,6 +40,7 @@ var food_growths = []
 func _ready():
 	sleep_timer = randf_range(35.0, 50.0)
 	add_to_group("actors")
+	set_up_stats()
 	entity_manager.add_to_mammals(self)
 	state_machine.init(self, level_manager, entity_manager)
 	var current_tile = level_manager.tile_map.local_to_map(global_position)
@@ -48,6 +53,16 @@ func _ready():
 	if mat and mat is ShaderMaterial:
 		mat.set_shader_parameter("highlight_enabled", false)
 
+func set_up_stats():
+	stats = CreatureStats.new()
+	stats.gender = randf() < 0.5
+	stats.courage = 3
+	stats.health = 3
+	stats.max_health = 3
+	stats.movement = 5
+	stats.search_range = 7
+	stats.hunger = 1
+	stats.pheromone_range = 1
 
 func _physics_process(delta: float) -> void:
 	if Global.is_paused:
@@ -56,6 +71,7 @@ func _physics_process(delta: float) -> void:
 	
 	sleep_timer -= delta
 	death_timer -= delta
+	mate_timer -= delta 
 	
 	
 	if death_timer <= 0:
@@ -68,7 +84,7 @@ func process_gender_for_mating():
 		true:
 			state_machine.change_state(mate_state)
 		false:
-			is_mating = true 
+			state_machine.change_state(pheromone_state)
 
 
 func move() -> bool:
@@ -103,7 +119,13 @@ func hide_label():
 	label.visible = not label.visible
 
 func highlight(i : int):
+	var should_highlight = (i == 1)
+	
+	is_highlighted = should_highlight
 	var mat = $Sprite2D.material
 	if mat and mat is ShaderMaterial:
-		mat.set_shader_parameter("highlight_enabled", !is_highlighted)
-		is_highlighted = !is_highlighted
+		mat.set_shader_parameter("highlight_enabled", is_highlighted)
+
+
+func set_mating():
+	pheromone_state.mating = true 

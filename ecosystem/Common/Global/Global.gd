@@ -1,6 +1,7 @@
 extends Node
 
 var is_paused : bool = false
+var current_highlight_type: int = -1
 
 signal turn_complete
 signal beetle_highlight(num)

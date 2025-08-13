@@ -1,0 +1,35 @@
+{
+	"initial_data": {
+		"beetles_count": 0.0,
+		"ecosystem_name": "",
+		"rabbits_count": 42.0,
+		"seed": "",
+		"snakes_count": 0.0
+	},
+	"output_data": {
+		"beetle_pheromones_dropped": 0,
+		"beetles_born": 0,
+		"days_passed": 1,
+		"dead_beetles": 0,
+		"dead_rabbits": 0,
+		"dead_snakes": 0,
+		"distance_traveled_beetles": 0,
+		"distance_traveled_rabbits": 2473,
+		"distance_traveled_snakes": 0,
+		"food_dropped": 113,
+		"food_eaten_beetles": 0,
+		"food_eaten_rabbits": 29,
+		"hide_places": 86,
+		"lowest_population_beetles": 0.0,
+		"lowest_population_rabbits": 42.0,
+		"lowest_population_snakes": 0.0,
+		"max_population_beetles": 0.0,
+		"max_population_rabbits": 47,
+		"max_population_snakes": 0.0,
+		"rabbit_pheromones_dropped": 95,
+		"rabbits_born": 6,
+		"rabbits_eaten_by_snakes": 0,
+		"snake_pheromones_dropped": 0,
+		"snakes_born": 0
+	}
+}

@@ -11,6 +11,8 @@ class_name EntityManager
 
 var mammals : Array[Rabbit]
 
+var snakes : Array[Snake]
+
 func set_up(data : Dictionary):
 	
 	for beetle in data['beetles_count']:
@@ -34,6 +36,7 @@ func set_up(data : Dictionary):
 		new_snake.entity_manager = self
 		new_snake.global_position = level_manager.tile_map.get_random_tile()
 		add_child(new_snake)
+		snakes.append(new_snake)
 		
 	
 
@@ -66,6 +69,7 @@ func hatch_egg(position, type):
 				Global.output_data['max_population_rabbits'] = int(get_herbi_count())
 		'snake':
 			new_entity = snake_scene.instantiate()
+			snakes.append(new_entity)
 			Global.output_data['snakes_born'] += 1
 			if int(get_snake_count()) > Global.ecosystem_data['snakes_count']:
 				Global.output_data['max_population_snakes'] = int(get_snake_count())

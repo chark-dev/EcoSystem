@@ -1,7 +1,7 @@
 extends State
 class_name RabbitIdle 
 
-var idle_timer = 0.0
+var idle_timer = randf_range(1.0, 3.0)
 @export var search_state : RabbitSearch
 @export var hide_state : RabbitHide
 

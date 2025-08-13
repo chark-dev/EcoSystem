@@ -12,6 +12,12 @@ func process_physics(delta):
 
 
 func enter():
+	for poly in parent.tile_highlights:
+		if poly:
+			poly.queue_free()
+	parent.tile_highlights.clear()
+	
+	
 	parent.label.text = "Death"
 	
 	if parent is Beetle:

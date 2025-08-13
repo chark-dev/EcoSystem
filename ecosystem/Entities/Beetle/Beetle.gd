@@ -138,13 +138,21 @@ func execute_action():
 
 
 func highlight(i : int):
+	var should_highlight = (i == 0)
+	
+	is_highlighted = should_highlight
 	var mat = $Sprite2D.material
 	if mat and mat is ShaderMaterial:
-		mat.set_shader_parameter("highlight_enabled", !is_highlighted)
-		is_highlighted = !is_highlighted
+		mat.set_shader_parameter("highlight_enabled", is_highlighted)
+
 
 func hide_label():
 	label.visible = not label.visible
+	
+	for poly in tile_highlights:
+		if poly:
+			poly.queue_free()
+	tile_highlights.clear()
 
 func set_mating():
 	pheromone_state.mating = true 

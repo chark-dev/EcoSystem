@@ -1,13 +1,7 @@
-[gd_resource type="Resource" script_class="MenuItem" load_steps=4 format=3 uid="uid://3o2yt1ssrb0v"]
+[gd_resource type="Resource" script_class="MenuItem" load_steps=3 format=3 uid="uid://3o2yt1ssrb0v"]
 
 [ext_resource type="Script" uid="uid://bbhchfnnwvf6q" path="res://Common/Inventory/MenuItems/menu_item.gd" id="1_n1ier"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_64ovd"]
-load_path = "res://.godot/imported/#2 - Transparent Icons & Drop Shadow.png-4753b67252312ffda22ea37bcac95f7d.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_n1ier"]
-atlas = SubResource("CompressedTexture2D_64ovd")
-region = Rect2(224, 352, 32, 32)
+[ext_resource type="Texture2D" uid="uid://c2mgvfggf5qhl" path="res://Resources/Items/pngtree-pixel-art-label-icon-design-vector-png-image_8532666.png" id="2_apejt"]
 
 [resource]
 script = ExtResource("1_n1ier")
@@ -15,5 +9,5 @@ type = 4
 name = ""
 description = "Hides State labels "
 stackable = false
-texture = SubResource("AtlasTexture_n1ier")
+texture = ExtResource("2_apejt")
 metadata/_custom_type_script = "uid://bbhchfnnwvf6q"

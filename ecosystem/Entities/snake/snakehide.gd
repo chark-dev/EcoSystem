@@ -26,6 +26,7 @@ func process_physics(delta):
 	return null
 
 func enter():
+	parent.label.text = 'Hide'
 	var tile = get_closest_hide_tile()
 	if tile:
 		target_hide_tile = tile

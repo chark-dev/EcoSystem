@@ -8,6 +8,7 @@ var mating = false
 
 var current_path_tile
 var patrol_tiles := []
+var pheromone_tiles = []
 var current_target_pos := Vector2.ZERO
 var center_tile := Vector2i.ZERO
 var center_position := Vector2.ZERO
@@ -37,6 +38,7 @@ func enter():
 				continue
 			var tile = center_tile + offset
 			if not level_manager.astar_grid.is_point_solid(tile):
+				pheromone_tiles.append(tile)
 				patrol_tiles.append(tile)
 	
 	#patrol_tiles.shuffle()
@@ -49,6 +51,7 @@ func enter():
 func exit():
 	mating = false
 	mate_timer = 20
+	pheromone_tiles = []
 
 func process_physics(delta):
 	var beetle_tile = level_manager.tile_map.local_to_map(parent.global_position)
@@ -88,8 +91,9 @@ func set_next_patrol_target():
 
 
 func rest_for_mate():
-	level_manager.tile_map.drop_pheromone(current_path_tile, parent)
-	Global.output_data['rabbit_pheromones_dropped'] += 1
+	for tile in pheromone_tiles:
+		level_manager.tile_map.drop_pheromone(current_path_tile, parent)
+		Global.output_data['rabbit_pheromones_dropped'] += 1
 	await get_tree().create_timer(15).timeout
 	
 	

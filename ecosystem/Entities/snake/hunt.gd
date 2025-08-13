@@ -77,6 +77,12 @@ func check_for_collision():
 		attacking = false
 		parent.entity_manager.mammals.erase(parent.closest_mammal)
 
+		for poly in parent.closest_mammal.tile_highlights:
+			if poly:
+				poly.queue_free()
+			parent.closest_mammal.tile_highlights.clear()
+			
+			
 		parent.closest_mammal.queue_free()
 		
 		parent.closest_mammal = null

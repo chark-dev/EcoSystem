@@ -60,7 +60,7 @@ func search_for_mate():
 				continue
 			
 			for pheromone in level_manager.tile_map.pheromone_map:
-				if pheromone.source is Rabbit:
+				if pheromone.source and pheromone.source is Rabbit:
 					var p_tile = pheromone.tile_pos
 					if p_tile == tile:
 						
